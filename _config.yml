@@ -8,7 +8,11 @@ subtitle: Daachun's Blog
 description: 不想成为策划的美术不是好程序！
 keywords: Unity,虚拟现实,游戏开发,日常
 author: Daachun
-language: zh-CN
+language:
+  - zh-CN
+  - en
+  - zh-HK
+  - zh-TW
 timezone: Asia/Shanghai
 
 # URL
@@ -96,9 +100,13 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: butterfly
+theme: volantis
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
+
+
+aplayer:
+  meting: true

@@ -22,13 +22,12 @@ appx格式（或appxbundle格式），是应用程序安装包格式，类似于
 
 ![UWP应用](https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200708102811.png)
 
-{% note info %}
 
-顺带一提，UWP应用在开始菜单中有“动态磁贴”功能。
+> 顺带一提，UWP应用在开始菜单中有“动态磁贴”功能。
+> 
+> ![动态磁贴](https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200708102828.png)
 
-![动态磁贴](https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200708102828.png)
 
-{% endnote %}
 
 
 Hololens2中的所有应用都是UWP应用，因此我们需要打包appx来安装部署我们的应用。
@@ -37,9 +36,9 @@ Hololens2中的所有应用都是UWP应用，因此我们需要打包appx来安�
 
 在使用Unity开发Hololens应用过程中，打包appx有两种方式：通过MRTK工具直接打包，或者通过VS打包。
 
-{% note default %}
-我个人比较推荐通过MRTK打包，这样可以略过一个步骤，并且工作流程不需要太多切换。
-{% endnote %}
+
+> 我个人比较推荐通过MRTK打包，这样可以略过一个步骤，并且工作流程不需要太多切换。
+
 
 ## 打包前的环境确认
 
@@ -100,16 +99,15 @@ Hololens2中的所有应用都是UWP应用，因此我们需要打包appx来安�
 ![Device Portal](https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200708111720.png)
 
 
-{% note info %}
-连接Hololens设备需要进行配对，一般来说通过浏览器进入设备控制台，忽略证书错误。
-![证书错误](https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200708111617.png)
+> 
+> 连接Hololens设备需要进行配对，一般来说通过浏览器进入设备控制台，忽略证书错误。
+> ![证书错误](https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200708111617.png)
+>
+> [这篇文章](https://blog.csdn.net/shanguuncle/article/details/77806731)讲了如何连接设备管理门户，注意，Hololens2需要打开“开发人员模式”。
+> 
 
-[这篇文章](https://blog.csdn.net/shanguuncle/article/details/77806731)讲了如何连接设备管理门户，注意，Hololens2需要打开“开发人员模式”。
-{% endnote %}
 
-{% note info %}
-注意：同包名的项目，版本号是判断新旧的唯一标准，如果你想覆盖之前的版本，一定要保证当前版本号高于之前的。
-{% endnote %}
+> 注意：同包名的项目，版本号是判断新旧的唯一标准，如果你想覆盖之前的版本，一定要保证当前版本号高于之前的。
 
 # 扩展阅读
 
