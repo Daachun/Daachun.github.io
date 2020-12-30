@@ -1,6 +1,6 @@
 ---
 title: Unity-网络通信基础
-cover: 缩略图
+index_img: 缩略图
 tags:
   - Unity
   - 网络

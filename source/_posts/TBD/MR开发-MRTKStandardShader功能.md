@@ -1,6 +1,6 @@
 ---
 title: MR开发-MRTKStandardShader功能
-cover: 缩略图
+index_img: 缩略图
 tags:
   - MR开发
   - Hololens

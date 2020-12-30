@@ -1,6 +1,6 @@
 ---
 title: AR开发-Vuforia和包管理器的坑
-cover: 缩略图
+index_img: 缩略图
 tags:
   - AR
   - Vuforia

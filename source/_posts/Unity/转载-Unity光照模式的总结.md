@@ -11,7 +11,7 @@ keywords:
   - 转载
   - 渲染
 description: Unity光照模式简单总结，作者MousouCrow是《地下城与勇士》同人游戏DFQ的开发者，蛮厉害的！
-cover: >-
+index_img: 
   https://connect-cdn-prd-cn.unitychina.cn/20190816/p/images/13c122f9-0ea1-4ef8-8cbf-93c010d5b89f____36.jpg
 top: false
 copyright: false

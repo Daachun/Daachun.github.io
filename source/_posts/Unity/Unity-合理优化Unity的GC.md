@@ -1,6 +1,6 @@
 ---
 title: Unity-合理优化Unity的GC
-cover: https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201108005923.png
+index_img: https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201108005923.png
 tags:
   - Unity
   - Unity优化

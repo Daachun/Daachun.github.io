@@ -1,6 +1,6 @@
 ---
 title: '[Unity]VRTK的基础配置、实现与UI交互'
-cover: >-
+index_img: 
   https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210502.png
 tags:
   - Unity

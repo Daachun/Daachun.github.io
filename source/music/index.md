@@ -1,7 +1,7 @@
 ---
 title: 我喜欢的音乐
 date: 2020-06-11 12:31:00
-cover: https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200611124501.jpg
+index_img: https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200611124501.jpg
 type: 'music'
 comments: false
 description:

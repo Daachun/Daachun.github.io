@@ -1,6 +1,6 @@
 ---
 title: '[MR开发]appx的打包发布'
-cover: >-
+index_img: 
   https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200708112959.png
 tags:
   - MR开发

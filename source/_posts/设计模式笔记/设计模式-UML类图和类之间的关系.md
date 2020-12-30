@@ -1,6 +1,6 @@
 ---
 title: '[设计模式]UML类图和类之间的关系'
-cover: >-
+index_img: 
   https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/W1yZ9Vr7XdaoYKP.png.png
 tags:
   - 编程

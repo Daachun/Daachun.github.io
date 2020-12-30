@@ -7,6 +7,7 @@ description:
 top_img: https://i.loli.net/2020/01/20/6vdQlJgSBYG4L1u.jpg
 mathjax:
 katex:
+layout: about
 ---
 
 这里是Daachun，研究生在读，主要研究虚拟现实应用与传统文化相关方向。NGGames是在我本科阶段和两位好友共同组成的游戏开发小组，以学习为目的来进行小项目的开发，具体作品（虽然没有几个）还请移步[项目页](/proj/)。

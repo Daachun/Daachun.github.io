@@ -1,6 +1,6 @@
 ---
 title: '[Unity]Bolt免费啦！'
-cover: >-
+index_img: 
   https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200723103138.png
 tags:
   - Unity

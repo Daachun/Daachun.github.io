@@ -1,6 +1,6 @@
 ---
 title: '[Unity]免费的Unity Pro？学生认证申请攻略'
-cover: >-
+index_img: 
   https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210422.png
 tags:
   - Unity

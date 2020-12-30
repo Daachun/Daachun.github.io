@@ -1,6 +1,6 @@
 ---
 title: '[技巧]Win10去除桌面快捷方式小箭头'
-cover: >-
+index_img: 
   https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200804204956.png
 tags:
   - 技巧

@@ -1,6 +1,6 @@
 ---
 title: '[资源]好用又好玩的体素建模软件——MagicaVoxel'
-cover: >-
+index_img: 
   https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610205841.png
 tags:
   - 资源

@@ -1,7 +1,7 @@
 ---
 title: {{ title }}
 date: {{ date }}
-cover:   缩略图
+index_img:   缩略图
 tags: 无标签
 categories: 未分类
 description: {{title}}

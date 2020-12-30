@@ -1,6 +1,6 @@
 ---
 title: '[笔记]Leetcode题型总结'
-cover: >-
+index_img: 
   https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200806134602.png
 tags:
   - 算法

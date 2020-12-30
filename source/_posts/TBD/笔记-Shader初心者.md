@@ -1,6 +1,6 @@
 ---
 title: '[笔记]Shader初心者'
-cover: >-
+index_img: 
   https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210255.png
 tags:
   - Unity

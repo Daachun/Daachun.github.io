@@ -1,6 +1,6 @@
 ---
 title: VR开发-Unity2019环境下的Cardboard VR开发
-cover: >-
+index_img: 
   https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201028090652.png
 tags:
   - VR开发

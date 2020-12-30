@@ -1,6 +1,6 @@
 ---
 title: '[Unity]InputSystem输入系统初探'
-cover: >-
+index_img: 
   https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210443.gif
 tags:
   - Unity
