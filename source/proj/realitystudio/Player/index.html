@@ -1,0 +1,103 @@
+<!DOCTYPE html><html><head><link rel="icon" href="./favicon.ico" type="image/x-icon"/><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=referrer content=no-referrer><style id=customize_css></style><title>Reality Studio</title><link href=./static/css/app_b5743efd.css rel=stylesheet></head><body><div id=app></div>
+<script>
+try {
+      const { ipcRenderer } = require('electron');
+      window.$ipcRenderer = ipcRenderer;
+      ipcRenderer.on("value", (event, message) => {
+        console.log(message);
+        if(message == "about"){
+          window.openAbout()
+        } else if(message == "privacyStatement"){
+         // window.openPrivacyStatement()
+        } else {
+          window.openConfirm(message)
+        }
+
+      })
+      ipcRenderer.on("loadModel", (event, message) => {
+        
+        console.log(message);
+        window.onload = function(){
+          window.interface.addModel(message, "");
+        }
+      })
+
+      ipcRenderer.on("dbClickOpen", (event, message) => {
+        
+        console.log(message);
+        window.interface.addModel(message, "");
+
+      })
+      ipcRenderer.on("Download", (event, message) => {
+        if(message == "success"){
+          
+        }else if(message == "failed"){
+
+        }
+        window.clearBlob();
+      })
+      ipcRenderer.on("change_language", (event, message) => {
+    
+        if(message == "en"){
+
+          window.interface.changeLanguage('en');
+
+        }else if(message == "zh"){
+
+          window.interface.changeLanguage('zh');
+
+        }
+      })
+      ipcRenderer.on("openSource", (event, message) => {
+
+        window.openSourcePopDialog()
+    })
+      ipcRenderer.on("file_operations", (event, message) => {
+
+        switch (message){
+          case 'new_scene':
+            window.newScene();
+            break;
+          case "import":
+            window.importModel();
+            break;
+          case "export_selected":
+            window.exportSelected();
+            break;
+          case "save_scene":
+            window.saveScene();
+            break;
+          case "save_scene_as":
+            window.saveSceneAs();
+            break;
+        }
+
+      })
+    } catch (e) {
+
+    }
+    // H5 plus事件处理
+    function plusReady() {
+      // Android处理返回键
+      plus.key.addEventListener('backbutton', function () {
+        plus.nativeUI.confirm('是否确认退出Reality Studio？', function (e) {
+          if (e.index > 0) {
+            plus.runtime.quit();
+          }
+        }, '提示', ['取消', '确定']) ;
+      }, false);
+      // 关闭启动界面
+      plus.navigator.setStatusBarBackground('#D74B28');
+      setTimeout(function () {
+        plus.navigator.closeSplashscreen();
+      }, 200);
+    }
+    if (window.plus) {
+      plusReady();
+    } else {
+      document.addEventListener('plusready', plusReady, false);
+    }
+    </script>
+    <script type="text/javascript"  src=./static/js/app.7abad1a5af77cee85f80.js></script>
+    </body>
+    </html>
