@@ -101,7 +101,9 @@ theme: fluid
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+  repo: https://e.coding.net/Daachun/blog/daachun.com.git
+  branch: master
 
 
 aplayer:
