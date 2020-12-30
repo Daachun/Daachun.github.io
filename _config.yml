@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 我的博客
-subtitle: '我在 CODING 部署的 Hexo 博客'
-description: ''
-keywords:
-author: 大春今天沉迷学习了吗
-language: zh-cn
-timezone: 'Asia/Shanghai'
+title: NGGames | 造梦者
+subtitle: Daachun's Blog
+description: 不想成为策划的美术不是好程序！
+keywords: Unity,虚拟现实,游戏开发,日常
+author: Daachun
+language: zh-CN
+timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://daachun.com/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -30,6 +30,9 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
+  - proj/realitystudio/**
+  - proj/h5/**
+  - yiqing/**
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -93,7 +96,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: butterfly
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
