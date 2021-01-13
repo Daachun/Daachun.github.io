@@ -1,0 +1,443 @@
+<mxfile host="3d31b3bf-32a5-4b2e-9492-aa05a51dcdbc" modified="2020-08-17T02:15:47.302Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.48.0 Chrome/78.0.3904.130 Electron/7.3.2 Safari/537.36" etag="YLJMSOlSrPUlJuP2U9_k" version="13.1.3" pages="4">
+    <diagram id="aAoJi2CSswB-YtWfiOIe" name="第 1 页">
+        <mxGraphModel dx="690" dy="790" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="5" target="8" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="开始" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="260" y="130" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="Trigger系统流程" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+                    <mxGeometry x="270" y="60" width="100" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;shape=link;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="8" target="12" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="440" y="280" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="8" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="320" y="370" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="8" value="用户拖拽物体" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="260" y="250" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="Object：&lt;br&gt;OnManipulation Started" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="440" y="250" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="15" target="23" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="320" y="480" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="15" value="用户将物体拖动到InstallTrigger范围内" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="260" y="370" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;shape=link;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="15" target="17" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="440" y="399.5" as="targetPoint"/>
+                        <mxPoint x="380" y="399.5" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="17" value="Object：&lt;br&gt;OnTriggerStay&lt;br&gt;Trigger：&lt;br&gt;OnTriggerStay" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="440" y="370" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="否" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="23" target="25" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" value="是" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="23" target="32" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="320" y="620" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="23" value="用户是否在&lt;br&gt;Trigger内&lt;br&gt;取消拖拽？" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="260" y="470" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="25" target="36" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="不用管，让物体就在那个位置" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="420" y="480" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="32" target="39" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="320" y="740" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="32" value="尝试控制StepManager进入下一步" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="260" y="600" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="36" value="结束" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="580" y="480" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="45" value="是" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="39" target="50" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="320" y="830" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="47" value="否" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="39" target="46" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="39" value="&lt;span&gt;是否为&lt;br&gt;下一步&lt;br&gt;所需的物体&lt;/span&gt;" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="260" y="700" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="46" target="48" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="46" value="物体返回原位" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="430" y="710" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="48" value="结束" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="580" y="710" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="54" value="是" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="50" target="52" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="57" value="否" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="50" target="58" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="450" y="870" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="50" value="(bool)&lt;br&gt;NextStep" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="265" y="830" width="110" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="52" target="55" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="52" value="Object返回原位置&lt;br&gt;Object隐藏" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="260" y="950" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="53" value="记录原位置？" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+                    <mxGeometry x="514" y="125" width="90" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="55" value="结束" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="260" y="1050" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="58" target="60" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="58" value="Object返回原位置" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="430" y="840" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="60" value="结束" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="570" y="840" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="71" style="edgeStyle=orthogonalEdgeStyle;shape=link;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="69" target="23" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="69" value="Object：OnManipulation Ended&lt;br&gt;Objcet：&lt;br&gt;OnTriggerStay" style="rounded=0;whiteSpace=wrap;html=1;shadow=0;strokeColor=#FFFFFF;fillColor=none;gradientColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="90" y="475" width="120" height="70" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="f7zk8bxQy-zHQp9urGj7" name="第 2 页">
+        &#xa;        &#xa;        &#xa;        
+        <mxGraphModel dx="1962" dy="597" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            &#xa;            &#xa;            &#xa;            
+            <root>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-0"/>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-1" parent="p7zQ_moHt2BQorT9gYb3-0"/>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="p7zQ_moHt2BQorT9gYb3-1" source="p7zQ_moHt2BQorT9gYb3-3" target="p7zQ_moHt2BQorT9gYb3-6" edge="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry relative="1" as="geometry">
+                        &#xa;                        &#xa;                        &#xa;                        
+                        <mxPoint x="260" y="300" as="targetPoint"/>
+                        &#xa;                        &#xa;                    &#xa;                    
+                    </mxGeometry>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-3" value="开始" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" vertex="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry x="200" y="160" width="120" height="60" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" source="p7zQ_moHt2BQorT9gYb3-6" target="p7zQ_moHt2BQorT9gYb3-10" edge="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry relative="1" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" source="p7zQ_moHt2BQorT9gYb3-6" target="p7zQ_moHt2BQorT9gYb3-18" edge="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry relative="1" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-6" value="灭火&lt;br&gt;UI系统：快去拿灭火器或消防栓灭火，点击确认后，此UI消失。&lt;br&gt;计时系统：点击确认后，开始计时。&lt;br&gt;移动系统：点击确认后，可以移动。" style="rounded=0;whiteSpace=wrap;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" vertex="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry x="200" y="310" width="120" height="180" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="p7zQ_moHt2BQorT9gYb3-1" source="p7zQ_moHt2BQorT9gYb3-18" target="p7zQ_moHt2BQorT9gYb3-26" edge="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry relative="1" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-18" value="UI系统：文字提示：快去拿灭火器或消防栓灭火" style="rounded=0;whiteSpace=wrap;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" vertex="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry x="200" y="570" width="120" height="110" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-23" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="p7zQ_moHt2BQorT9gYb3-1" source="p7zQ_moHt2BQorT9gYb3-26" target="p7zQ_moHt2BQorT9gYb3-22" edge="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry relative="1" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="p7zQ_moHt2BQorT9gYb3-1" source="p7zQ_moHt2BQorT9gYb3-26" target="p7zQ_moHt2BQorT9gYb3-24" edge="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry relative="1" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-31" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="p7zQ_moHt2BQorT9gYb3-1" source="p7zQ_moHt2BQorT9gYb3-22" target="p7zQ_moHt2BQorT9gYb3-30" edge="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry relative="1" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-22" value="拿取灭火器&lt;br&gt;&lt;br&gt;前一个灭火器用完才可以拾取下一个" style="rounded=0;whiteSpace=wrap;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" vertex="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry x="20" y="890" width="120" height="110" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="p7zQ_moHt2BQorT9gYb3-1" source="p7zQ_moHt2BQorT9gYb3-10" target="p7zQ_moHt2BQorT9gYb3-15" edge="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry relative="1" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-10" value="计时系统：倒计时完成后：没有灭火" style="rounded=0;whiteSpace=wrap;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" vertex="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry x="400" y="358.75" width="120" height="82.5" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-14" value="结束" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" vertex="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry x="730" y="370" width="120" height="60" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="p7zQ_moHt2BQorT9gYb3-1" source="p7zQ_moHt2BQorT9gYb3-15" target="p7zQ_moHt2BQorT9gYb3-14" edge="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry relative="1" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-15" value="爆炸，游戏结束&lt;br&gt;UI系统：由于没有及时灭火，导致爆炸" style="rounded=0;whiteSpace=wrap;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" vertex="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry x="570" y="370" width="120" height="60" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-33" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" source="p7zQ_moHt2BQorT9gYb3-24" target="p7zQ_moHt2BQorT9gYb3-32" edge="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry relative="1" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-24" value="先点击启泵开关：直接点击消火栓会出现UI系统提示：使用消火栓前先按下启泵开关" style="rounded=0;whiteSpace=wrap;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" vertex="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry x="390" y="890" width="120" height="110" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-26" value="开启消火栓柜门" style="rounded=0;whiteSpace=wrap;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" vertex="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry x="200" y="730" width="120" height="60" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="p7zQ_moHt2BQorT9gYb3-1" source="p7zQ_moHt2BQorT9gYb3-30" target="p7zQ_moHt2BQorT9gYb3-42" edge="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry relative="1" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-30" value="灭火成功后，出现文字提示：请关闭阀门" style="rounded=0;whiteSpace=wrap;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" vertex="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry x="230" y="1530" width="120" height="60" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-35" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" source="p7zQ_moHt2BQorT9gYb3-32" target="p7zQ_moHt2BQorT9gYb3-34" edge="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry relative="1" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-32" value="按下后点击消火栓，软管垂下，喷头入手" style="rounded=0;whiteSpace=wrap;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" vertex="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry x="390" y="1070" width="120" height="60" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="p7zQ_moHt2BQorT9gYb3-1" source="p7zQ_moHt2BQorT9gYb3-34" target="p7zQ_moHt2BQorT9gYb3-30" edge="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry relative="1" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-34" value="扳机键喷干粉，没有容量限制" style="rounded=0;whiteSpace=wrap;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" vertex="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry x="390" y="1210" width="120" height="60" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="p7zQ_moHt2BQorT9gYb3-1" source="p7zQ_moHt2BQorT9gYb3-39" target="p7zQ_moHt2BQorT9gYb3-15" edge="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry relative="1" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-39" value="未灭火成功时按阀门，回火，炸" style="rounded=0;whiteSpace=wrap;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" vertex="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry x="230" y="1430" width="120" height="60" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-41" value="UI系统：由于火焰尚未熄灭，此时关闭阀门造成回火，引发爆炸" style="rounded=0;whiteSpace=wrap;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" vertex="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry x="570" y="720" width="120" height="60" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-42" value="关闭阀门后，UI系统：火灾现场已处理完毕" style="rounded=0;whiteSpace=wrap;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" vertex="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry x="230" y="1650" width="120" height="60" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-46" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" source="p7zQ_moHt2BQorT9gYb3-44" target="p7zQ_moHt2BQorT9gYb3-45" edge="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry relative="1" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-48" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" source="p7zQ_moHt2BQorT9gYb3-44" target="p7zQ_moHt2BQorT9gYb3-47" edge="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry relative="1" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-50" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" source="p7zQ_moHt2BQorT9gYb3-44" target="p7zQ_moHt2BQorT9gYb3-49" edge="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry relative="1" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-44" value="交互系统：&lt;br&gt;和UI交互&lt;br&gt;和灭火产品交互&lt;br&gt;和场景内物体交互" style="rounded=0;whiteSpace=wrap;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" vertex="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry x="-290" y="40" width="250" height="169" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-49" value="和场景内物体交互：和消火栓柜子门，启泵器，阀门" style="rounded=0;whiteSpace=wrap;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" vertex="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry x="-60" y="400" width="120" height="60" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-47" value="和灭火产品交互：&lt;br&gt;唯一性，同时只能有一个物体在手上&lt;br&gt;可以换产品，当且仅当第一个灭火器使用完毕" style="rounded=0;whiteSpace=wrap;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" vertex="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry x="-390" y="400" width="120" height="101" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;                &#xa;                
+                <mxCell id="p7zQ_moHt2BQorT9gYb3-45" value="UI交互：随时都可以，需要射线显示" style="rounded=0;whiteSpace=wrap;html=1;" parent="p7zQ_moHt2BQorT9gYb3-1" vertex="1">
+                    &#xa;                    &#xa;                    &#xa;                    
+                    <mxGeometry x="-225" y="400" width="120" height="60" as="geometry"/>
+                    &#xa;                    &#xa;                &#xa;                
+                </mxCell>
+                &#xa;                &#xa;            &#xa;            
+            </root>
+            &#xa;            &#xa;        &#xa;        
+        </mxGraphModel>
+        &#xa;        &#xa;    &#xa;    
+    </diagram>
+    <diagram id="xa_jotnuo6yI-I4e6dbA" name="第 3 页">
+        <mxGraphModel dx="690" dy="790" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="bPn3aNNNKDfQEunEmIc2-0"/>
+                <mxCell id="bPn3aNNNKDfQEunEmIc2-1" parent="bPn3aNNNKDfQEunEmIc2-0"/>
+                <mxCell id="g5otrQxQfZmQ7J7VZkxf-2" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="bPn3aNNNKDfQEunEmIc2-1" vertex="1">
+                    <mxGeometry x="29" y="60" width="770" height="480" as="geometry"/>
+                </mxCell>
+                <mxCell id="g5otrQxQfZmQ7J7VZkxf-3" value="游戏UI画面" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="bPn3aNNNKDfQEunEmIc2-1" vertex="1">
+                    <mxGeometry x="29" y="26" width="80" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="g5otrQxQfZmQ7J7VZkxf-4" value="手机" style="rounded=0;whiteSpace=wrap;html=1;" parent="bPn3aNNNKDfQEunEmIc2-1" vertex="1">
+                    <mxGeometry x="720" y="420" width="50" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="g5otrQxQfZmQ7J7VZkxf-5" value="这里是精彩的&lt;br&gt;3D画面" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" parent="bPn3aNNNKDfQEunEmIc2-1" vertex="1">
+                    <mxGeometry x="240" y="140" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="g5otrQxQfZmQ7J7VZkxf-9" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;html=1;outlineConnect=0;" parent="bPn3aNNNKDfQEunEmIc2-1" vertex="1">
+                    <mxGeometry x="350" y="330" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="g5otrQxQfZmQ7J7VZkxf-10" value="玩家&lt;br&gt;第三人称小人" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="bPn3aNNNKDfQEunEmIc2-1" vertex="1">
+                    <mxGeometry x="324" y="355" width="90" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="g5otrQxQfZmQ7J7VZkxf-11" value="lowpoly风格&lt;br&gt;有街区 有路" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" parent="bPn3aNNNKDfQEunEmIc2-1" vertex="1">
+                    <mxGeometry x="430" y="180" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="g5otrQxQfZmQ7J7VZkxf-12" value="大概和橘猫的那个&lt;br&gt;视频差不多" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" parent="bPn3aNNNKDfQEunEmIc2-1" vertex="1">
+                    <mxGeometry x="190" y="250" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="g5otrQxQfZmQ7J7VZkxf-15" value="每次开始都是&lt;br&gt;随机生成的街区" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" parent="bPn3aNNNKDfQEunEmIc2-1" vertex="1">
+                    <mxGeometry x="470" y="290" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="g5otrQxQfZmQ7J7VZkxf-16" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="bPn3aNNNKDfQEunEmIc2-1" vertex="1">
+                    <mxGeometry x="29" y="585" width="770" height="480" as="geometry"/>
+                </mxCell>
+                <mxCell id="g5otrQxQfZmQ7J7VZkxf-18" value="手机打开可以接单&lt;br&gt;游戏主要的菜单也在手机里&lt;br&gt;体现互联网的便利性&lt;br&gt;&lt;br&gt;（可以买奶茶店？通过手机经营？）&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;不成熟的小想法：&lt;br&gt;这个时候进入第一人称模式&lt;br&gt;你需要用边缘的余光来看路&lt;br&gt;（而且操作会有一些延迟？）" style="rounded=0;whiteSpace=wrap;html=1;" parent="bPn3aNNNKDfQEunEmIc2-1" vertex="1">
+                    <mxGeometry x="310" y="630" width="200" height="370" as="geometry"/>
+                </mxCell>
+                <mxCell id="g5otrQxQfZmQ7J7VZkxf-19" value="WASD移动&lt;br&gt;鼠标控制视角" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" parent="bPn3aNNNKDfQEunEmIc2-1" vertex="1">
+                    <mxGeometry x="600" y="670" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="g5otrQxQfZmQ7J7VZkxf-20" value="有时间概念&lt;br&gt;有放单高峰期" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" parent="bPn3aNNNKDfQEunEmIc2-1" vertex="1">
+                    <mxGeometry x="60" y="650" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="g5otrQxQfZmQ7J7VZkxf-21" value="赚配送费&lt;br&gt;还有小费" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" parent="bPn3aNNNKDfQEunEmIc2-1" vertex="1">
+                    <mxGeometry x="70" y="775" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="g5otrQxQfZmQ7J7VZkxf-22" value="画风要可爱&lt;br&gt;撞到物体要有&lt;br&gt;果冻的感觉，震一下" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" parent="bPn3aNNNKDfQEunEmIc2-1" vertex="1">
+                    <mxGeometry x="610" y="840" width="160" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="g5otrQxQfZmQ7J7VZkxf-24" value="（路上的&lt;br&gt;一些东西要能互动）" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" parent="bPn3aNNNKDfQEunEmIc2-1" vertex="1">
+                    <mxGeometry x="600" y="930" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="g5otrQxQfZmQ7J7VZkxf-25" value="街区按照地下城&lt;br&gt;式的进行生成有随机的名称&lt;br&gt;&lt;br&gt;进入新街区会在左下角显示" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" parent="bPn3aNNNKDfQEunEmIc2-1" vertex="1">
+                    <mxGeometry x="70" y="360" width="200" height="110" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="xwVHYGEK6_8IVeCtUsqh" name="第 4 页">
+        <mxGraphModel dx="942" dy="790" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="v9O7fIUI0O3BU8V9d_fV-0"/>
+                <mxCell id="v9O7fIUI0O3BU8V9d_fV-1" parent="v9O7fIUI0O3BU8V9d_fV-0"/>
+                <mxCell id="v9O7fIUI0O3BU8V9d_fV-2" value="开始" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="v9O7fIUI0O3BU8V9d_fV-1">
+                    <mxGeometry x="220" y="60" width="120" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
