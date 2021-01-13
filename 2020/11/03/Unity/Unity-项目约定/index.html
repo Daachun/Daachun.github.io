@@ -1,0 +1,449 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Unity-项目约定 | NGGames | 造梦者</title><meta name="keywords" content="Unity,资源,OpenProject"><meta name="author" content="Daachun"><meta name="copyright" content="Daachun"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="来自于Unity官方的项目标准">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity-项目约定">
+<meta property="og:url" content="http://daachun.com/2020/11/03/Unity/Unity-%E9%A1%B9%E7%9B%AE%E7%BA%A6%E5%AE%9A/index.html">
+<meta property="og:site_name" content="NGGames | 造梦者">
+<meta property="og:description" content="来自于Unity官方的项目标准">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201103095215.png">
+<meta property="article:published_time" content="2020-11-03T01:49:48.000Z">
+<meta property="article:modified_time" content="2020-11-03T03:49:52.951Z">
+<meta property="article:author" content="Daachun">
+<meta property="article:tag" content="Unity">
+<meta property="article:tag" content="资源">
+<meta property="article:tag" content="OpenProject">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201103095215.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://daachun.com/2020/11/03/Unity/Unity-%E9%A1%B9%E7%9B%AE%E7%BA%A6%E5%AE%9A/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="preconnect" href="//zz.bdstatic.com"/><meta name="baidu-site-verification" content="BfQAZEFBNX"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-right"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-11-03 11:49:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}const fontSizeVal = saveToLocal.get('global-font-size')
+if (fontSizeVal !== undefined) {
+  document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+}})()</script><style type="text/css">#toggle-sidebar {bottom: 80px}</style><meta name="generator" content="Hexo 5.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/205247.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">34</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-file"></i><span> 博客</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://tableconvert.com/"><i class="fa-fw fas fa-table"></i><span> 表格生成</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-heartbeat"></i><span> 喜欢</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://leetcode-cn.com/"><i class="fa-fw fas fa-code"></i><span> 去刷题</span></a></li><li><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-photo-video"></i><span> 相册</span></a></li><li><a class="site-page" href="/IdeaGenerator/"><i class="fa-fw fas fa-lightbulb"></i><span> 狗屁不通</span></a></li><li><a class="site-page" href="/proj/"><i class="fa-fw fas fa-tasks"></i><span> 项目发布</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-film"></i><span> 追番</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://mo.fish/"><i class="fa-fw fas fa-thumbs-up"></i><span> 摸鱼</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201103095215.png)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">NGGames | 造梦者</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-file"></i><span> 博客</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://tableconvert.com/"><i class="fa-fw fas fa-table"></i><span> 表格生成</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-heartbeat"></i><span> 喜欢</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://leetcode-cn.com/"><i class="fa-fw fas fa-code"></i><span> 去刷题</span></a></li><li><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-photo-video"></i><span> 相册</span></a></li><li><a class="site-page" href="/IdeaGenerator/"><i class="fa-fw fas fa-lightbulb"></i><span> 狗屁不通</span></a></li><li><a class="site-page" href="/proj/"><i class="fa-fw fas fa-tasks"></i><span> 项目发布</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-film"></i><span> 追番</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://mo.fish/"><i class="fa-fw fas fa-thumbs-up"></i><span> 摸鱼</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Unity-项目约定</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-11-03T01:49:48.000Z" title="发表于 2020-11-03 09:49:48">2020-11-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-11-03T03:49:52.951Z" title="更新于 2020-11-03 11:49:52">2020-11-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Unity/">Unity</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>来源：<a target="_blank" rel="noopener" href="https://docs.google.com/document/d/1-eUWZ0lWREFu5iH-ggofwnixDDQqalOoT4Yc0NpWR3k/edit#heading=h.23fnzd1otnih">Open Projets:Conventions</a></p>
+</blockquote>
+<blockquote>
+<p>Unity官方的第一个开放项目，项目最终会上架Steam。获取信息可以看<a target="_blank" rel="noopener" href="https://github.com/UnityTechnologies/open-project-1">这里</a>。这个标准可以直接拿来用到自己的项目中。</p>
+</blockquote>
+<h1 id="编码（Coding）"><a href="#编码（Coding）" class="headerlink" title="编码（Coding）"></a>编码（Coding）</h1><p>我们使用<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/names-of-type-members">.NET standards</a>作为基础，并在下方进行了更改。</p>
+<h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h2><ul>
+<li><p>使用具有<strong>描述性</strong>和<strong>准确性</strong>的名称（即使这使得名称特别长），这易于阅读，易于移植。</p>
+</li>
+<li><p><u>不要</u>使用<strong>缩写</strong>。</p>
+</li>
+<li><p>使用公认标准的<strong>首字母缩写</strong>，例如：UI，IO。</p>
+</li>
+<li><p>方法名（Method）应为<strong>动词</strong>或者<strong>动词短语</strong>。</p>
+</li>
+<li><p>属性名（Property）应为<strong>名词</strong>、<strong>名词短语</strong>或者<strong>形容词</strong>。</p>
+</li>
+<li><p>布尔值（Boolean）名应为<strong>肯定含义</strong>的短语，你可以在名称前加上诸如“Is”，“Has”，“Can”的前缀，例如：IsActive，CanJump。</p>
+</li>
+<li><p>如果一个物体涉及到使用<strong>多个属性</strong>，使用<strong>物体名称</strong>作为属性名或者作用的前缀，例如：</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">Color _gameTitleColor;</span><br><span class="line">String _gameTitleString;</span><br><span class="line">TextMeshProUGUI _gameTitleText;</span><br></pre></td></tr></table></figure></li>
+<li><p>如果名字不在固定列表中，<u>避免</u>使用<strong>数字</strong>命名。例如：<em>animator1</em>，<em>animator2</em>。命名应<strong>解释</strong>两个属性的不同，例如：<em>playerAnimator</em>，<em>enemyAnimator</em>。</p>
+</li>
+</ul>
+<h2 id="大小写"><a href="#大小写" class="headerlink" title="大小写"></a>大小写</h2><p><strong>定义</strong></p>
+<p>camelCase：第一个字母为小写，之后单词的第一个字母为大写。</p>
+<p>PascalCase：单词的第一个字母都是大写。如果一个单词是有两个字母的缩写，两个字母都大写。如果一个单词是有两个以上字母的缩写，则只有第一个字母大写。</p>
+<ul>
+<li>类、方法、枚举、命名空间、公共字段、公共属性都用<strong>PascalCase</strong>。例如：<code>ClassName</code>，<code>GetValue</code>。</li>
+<li>局部变量，方法参数用<strong>camelCase</strong>。例如：<code>previousValue</code>，<code>mainUI</code>。</li>
+<li>私有字段、私有属性用camelCase，但是要以下划线开头。例如：<code>_inputReader</code>。</li>
+<li>常量全大写，用下划线分割单词。例如：<code>GRAVITY_AMOUNT</code>。</li>
+</ul>
+<h2 id="编程（Programming）"><a href="#编程（Programming）" class="headerlink" title="编程（Programming）"></a>编程（Programming）</h2><ul>
+<li><p>保持字段和方法的<strong>私有性</strong>，除非你<em>需要</em>他们公开。</p>
+</li>
+<li><p>如果你想在Inspector中显示字段，而不想让其它类访问这个变量，不要用<code>public</code>，使用这个attribute：<code>[SerializeField]</code>和<code>private</code>。</p>
+<p><strong>注意：</strong>这样做可能会收到警告：“Field is never assigned to, will always have its default value”，可以用<code>= default</code>来为字段指定默认值。</p>
+</li>
+<li><p>尽量避免使用单例（Singletons），请尝试使用ScriptableObjects（<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=VBA1QCoEAX4">1</a>，<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=raQ3iHhE_Kk&ab_channel=Unity">2</a>）来建立一个类似的、集中的、可以从多个对象中访问的类。</p>
+</li>
+<li><p>不要用<code>var</code>来声明变量，要准确声明类型。</p>
+</li>
+<li><p>避免使用静态变量。如果你确定绝对需要他们，请确保它们与<em>Fast Enter Play Mode</em>兼容，详情<a target="_blank" rel="noopener" href="https://docs.unity3d.com/2019.3/Documentation/Manual/DomainReloading.html">点击这里</a>。</p>
+</li>
+<li><p>不要在你的代码中使用硬编码的“魔法数字”。例如：角色移动<code>xInput * 0.035f</code>。为什么用这个数字？请将这个数字存储在一个有明确名称的字段中——也许再加个注释说明为什么选择这个特殊数字。</p>
+</li>
+<li><p>提交代码之前，删除所有没使用过的<code>using</code>命令（例如：<code>using System;</code>）。</p>
+</li>
+</ul>
+<h2 id="格式化"><a href="#格式化" class="headerlink" title="格式化"></a>格式化</h2><ul>
+<li><p>每列用<strong>一个Tab</strong>来缩进代码，<u>不要用空格</u>。</p>
+</li>
+<li><p>大括号：如果内容为空，写在同一行。如果非空，每个占一行。例如：</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">EmptyBraces</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">NonEmptyBraces</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>彼此包含的逻辑关系需要进行缩进，以表示层次。例如：</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">FunctionName</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(somethingHappended)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><ul>
+<li><p><strong>重要：</strong>不要画蛇添足。如果你认为任何人看一眼就能明白代码的作用，就<u>不要</u>添加注释。请给你的变量、类、方法起个好名字，让他们自己解释自己！</p>
+</li>
+<li><p>写行内注释为单独一行代码进行补充说明。</p>
+</li>
+<li><p>在每一个类上都要写摘要，以描述类的目的。如果一个类可读性不高、或者功能细节不直观时，可以选择性的在摘要中加入这些细节。例如：</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> This class manages save data</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>提示：在IDE中输入三个“/”符号，一般会自动生成摘要。看<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/documentation-comments">微软官方规范</a>。</p>
+</li>
+<li><p>方法前写个解释它功能的注释，以防方法名不准确或者添加其他重要细节。你也可以用行内注释，例如：</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span> This function does this... <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="built_in">float</span> <span class="title">CalculateBoundingBox</span>(<span class="params"></span>)</span>&#123; &#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>使用以<code>//TODO:</code>开头的注释来表示需要稍后完成的事情，这样你就不会忘记它。<strong>注意：</strong>这<u>不是</u>在鼓励你推送未完成的功能。</p>
+</li>
+<li><p>不要写<code>#region</code>或者<code>//--------</code>这类注释。</p>
+</li>
+</ul>
+<h1 id="场景、层次结构"><a href="#场景、层次结构" class="headerlink" title="场景、层次结构"></a>场景、层次结构</h1><h2 id="组织结构"><a href="#组织结构" class="headerlink" title="组织结构"></a>组织结构</h2><ul>
+<li><p>在根（root）上创建空的GameObject并命名，创建视觉上的分隔符。例如：“— Camera —”，“— Environment —”，“— Lighting —”等。给这些分隔符添加“EditorOnly”标签，这样打包的时候就不会加入。</p>
+</li>
+<li><p>用来做容器的空物体，如果它里面只会包含1-2个对象，不要使用。</p>
+</li>
+<li><p>UI部分</p>
+<ul>
+<li><p>尽可能使用同一个Canvas，只有在Canvas属性改变的时候才创建多个Canvas。</p>
+</li>
+<li><p>每一个屏幕创建一个面板（Panel）。例如：主菜单、设置、暂停…</p>
+</li>
+<li><p>用面板（Panel）作为容器，将UI元素进行分组。例如：一个设置标签和它的选项。</p>
+<p>面板能帮忙固定需要固定在一起的元素。例如：一些能量/物品UI在屏幕右下角。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="命名-1"><a href="#命名-1" class="headerlink" title="命名"></a>命名</h2><ul>
+<li><p>在GameObject命名中，不要用空格。</p>
+</li>
+<li><p>用PascalCase命名。例如：MainCharacter，DoorTrigger。</p>
+</li>
+<li><p>如果仅用PascalCase命名会产生歧义，用下划线连接两个概念。例如：MainHall_ExitTrigger，BossMinion_AttackWaypoints。</p>
+</li>
+<li><p><strong>预制体（Prefabs）</strong>：如果合理，可以重新命名实例。例如：一个Prefab Variant文件名称为“Protagonist_Scene1Variant”，如果你只用它一次，可以直接重命名为“Protagonist”。</p>
+<blockquote>
+<p><strong>Prefabs:</strong> Rename instances if it makes sense. Ex: A Prefab Variant file is called Protagonist_Scene1Variant, but once you use it you could rename it just Protagonist.</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="项目资源"><a href="#项目资源" class="headerlink" title="项目资源"></a>项目资源</h1><h2 id="命名-2"><a href="#命名-2" class="headerlink" title="命名"></a>命名</h2><ul>
+<li><p>与<a href="%E5%9C%BA%E6%99%AF%E3%80%81%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84">场景、层次结构</a>规则相同。</p>
+</li>
+<li><p>同一个文件夹下，如果文件相关，使他们名称<strong>自然而然地归为一组</strong>。</p>
+<ul>
+<li>一般来说，用对象所属的事物作为前缀。例如：PlayerAnimationController、PlayerIdle、PlayerRun等。</li>
+<li>如果这样合理的话，你可以使相似的对象保持在一起，即使他们属于不同事物，或者形容词导致他们分开。例如：在一个道具资产文件夹中，你可以用TableRound、TableRectangular来作为名称，这样它们就呆在一起，如果用RoundTable、RectangularTable，他们就不在一起了。</li>
+</ul>
+</li>
+<li><p>避免在名称中使用文件类型。例如：用ShinyMetal代替ShinyMetalMaterial。</p>
+</li>
+</ul>
+<h2 id="文件夹"><a href="#文件夹" class="headerlink" title="文件夹"></a>文件夹</h2><ul>
+<li><p>在根目录，将你的资源放到文件夹中，这些文件夹标识了游戏的区域、系统、位置。你可以创建子文件夹来分割不同类型的资源。</p>
+</li>
+<li><p>场景总是放在Scenes目录下。</p>
+</li>
+<li><p>不属于某个系统的脚本会放在Scripts文件夹目录下，可以建立子文件夹来分类。</p>
+</li>
+<li><p>总而言之：如果一个系统/功能只有脚本，那就在Scripts中创建一个文件夹。如果它有其它类型的资产，就把该文件夹放在根目录下，并按照资产类型添加子文件夹。</p>
+<p>例如：</p>
+<p><img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201103113812.png" alt="文件夹规范"></p>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Daachun</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://daachun.com/2020/11/03/Unity/Unity-%E9%A1%B9%E7%9B%AE%E7%BA%A6%E5%AE%9A/">http://daachun.com/2020/11/03/Unity/Unity-%E9%A1%B9%E7%9B%AE%E7%BA%A6%E5%AE%9A/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://daachun.com" target="_blank">NGGames | 造梦者</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Unity/">Unity</a><a class="post-meta__tags" href="/tags/%E8%B5%84%E6%BA%90/">资源</a><a class="post-meta__tags" href="/tags/OpenProject/">OpenProject</a></div><div class="post_share"><div class="social-share" data-image="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201103095215.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/11/06/Unity/Unity-%E5%90%88%E7%90%86%E4%BC%98%E5%8C%96Unity%E7%9A%84GC/"><img class="prev-cover" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201108005923.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Unity-合理优化Unity的GC</div></div></a></div><div class="next-post pull-right"><a href="/2020/10/26/Unity/VR%E5%BC%80%E5%8F%91-Unity2019%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84CardboardVR%E5%BC%80%E5%8F%91/"><img class="next-cover" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201028090652.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">VR开发-Unity2019环境下的Cardboard VR开发</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/07/23/Unity/Unity-Bolt免费啦！/" title="[Unity]Bolt免费啦！"><img class="cover" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200723103138.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-23</div><div class="title">[Unity]Bolt免费啦！</div></div></a></div><div><a href="/2020/08/03/Unity/Unity-Bolt学习资源推荐/" title="[Unity]Bolt学习资源推荐"><img class="cover" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200803201438.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-03</div><div class="title">[Unity]Bolt学习资源推荐</div></div></a></div><div><a href="/2020/06/03/Unity/Unity-免费的Unity Pro？学生认证申请攻略/" title="[Unity]免费的Unity Pro？学生认证申请攻略"><img class="cover" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210422.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-03</div><div class="title">[Unity]免费的Unity Pro？学生认证申请攻略</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/205247.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Daachun</div><div class="author-info__description">不想成为策划的美术不是好程序！</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">34</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=649856329&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://steamcommunity.com/id/daachun/" target="_blank" title="Steam"><i class="fab fa-steam"></i></a><a class="social-icon" href="mailto:649856329@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://github.com/Daachun" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%EF%BC%88Coding%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">编码（Coding）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E5%90%8D"><span class="toc-number">1.1.</span> <span class="toc-text">命名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%A7%E5%B0%8F%E5%86%99"><span class="toc-number">1.2.</span> <span class="toc-text">大小写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%EF%BC%88Programming%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">编程（Programming）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="toc-number">1.4.</span> <span class="toc-text">格式化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A"><span class="toc-number">1.5.</span> <span class="toc-text">注释</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%E3%80%81%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">场景、层次结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84"><span class="toc-number">2.1.</span> <span class="toc-text">组织结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E5%90%8D-1"><span class="toc-number">2.2.</span> <span class="toc-text">命名</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E8%B5%84%E6%BA%90"><span class="toc-number">3.</span> <span class="toc-text">项目资源</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E5%90%8D-2"><span class="toc-number">3.1.</span> <span class="toc-text">命名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">3.2.</span> <span class="toc-text">文件夹</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/01/13/%5B%E7%AC%94%E8%AE%B0%5D%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E8%AE%B0%E5%BD%95/" title="[笔记]学习资源记录"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210517.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[笔记]学习资源记录"/></a><div class="content"><a class="title" href="/2021/01/13/%5B%E7%AC%94%E8%AE%B0%5D%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E8%AE%B0%E5%BD%95/" title="[笔记]学习资源记录">[笔记]学习资源记录</a><time datetime="2021-01-13T04:12:27.000Z" title="发表于 2021-01-13 12:12:27">2021-01-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/11/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B0-100%E5%B1%82%E6%A5%BC%E6%91%942%E4%B8%AA%E8%8B%B9%E6%9E%9C%EF%BC%9F%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%A1%86%E6%9E%B6/" title="笔记-100层楼摔2个苹果？动态规划框架"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201113191346.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="笔记-100层楼摔2个苹果？动态规划框架"/></a><div class="content"><a class="title" href="/2020/11/11/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B0-100%E5%B1%82%E6%A5%BC%E6%91%942%E4%B8%AA%E8%8B%B9%E6%9E%9C%EF%BC%9F%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%A1%86%E6%9E%B6/" title="笔记-100层楼摔2个苹果？动态规划框架">笔记-100层楼摔2个苹果？动态规划框架</a><time datetime="2020-11-11T09:11:22.000Z" title="发表于 2020-11-11 17:11:22">2020-11-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/06/Unity/Unity-%E5%90%88%E7%90%86%E4%BC%98%E5%8C%96Unity%E7%9A%84GC/" title="Unity-合理优化Unity的GC"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201108005923.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Unity-合理优化Unity的GC"/></a><div class="content"><a class="title" href="/2020/11/06/Unity/Unity-%E5%90%88%E7%90%86%E4%BC%98%E5%8C%96Unity%E7%9A%84GC/" title="Unity-合理优化Unity的GC">Unity-合理优化Unity的GC</a><time datetime="2020-11-06T08:50:10.000Z" title="发表于 2020-11-06 16:50:10">2020-11-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/03/Unity/Unity-%E9%A1%B9%E7%9B%AE%E7%BA%A6%E5%AE%9A/" title="Unity-项目约定"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201103095215.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Unity-项目约定"/></a><div class="content"><a class="title" href="/2020/11/03/Unity/Unity-%E9%A1%B9%E7%9B%AE%E7%BA%A6%E5%AE%9A/" title="Unity-项目约定">Unity-项目约定</a><time datetime="2020-11-03T01:49:48.000Z" title="发表于 2020-11-03 09:49:48">2020-11-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/10/26/Unity/VR%E5%BC%80%E5%8F%91-Unity2019%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84CardboardVR%E5%BC%80%E5%8F%91/" title="VR开发-Unity2019环境下的Cardboard VR开发"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201028090652.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="VR开发-Unity2019环境下的Cardboard VR开发"/></a><div class="content"><a class="title" href="/2020/10/26/Unity/VR%E5%BC%80%E5%8F%91-Unity2019%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84CardboardVR%E5%BC%80%E5%8F%91/" title="VR开发-Unity2019环境下的Cardboard VR开发">VR开发-Unity2019环境下的Cardboard VR开发</a><time datetime="2020-10-26T09:50:15.000Z" title="发表于 2020-10-26 17:50:15">2020-10-26</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201103095215.png)"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2021 By Daachun</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.spacingElementById('content-inner')
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.spacingElementById('content-inner')
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: '8CFscafTjfjGcsilNQmda6vv-gzGzoHsz',
+      appKey: 'LJAnvsSfSunbV8eX0IvJn0F8',
+      placeholder: '请尽情评论吧！',
+      avatar: 'identicon',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign(initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><style>.aplayer.no-destroy.no-reload.aplayer-withlist.aplayer-fixed.aplayer-narrow .aplayer-body{left:-66px!important;}.aplayer.no-destroy.no-reload.aplayer-withlist.aplayer-fixed.aplayer-narrow .aplayer-body:hover{left:0px!important}</style><div class="aplayer no-destroy" data-id="34194010" data-server="netease" data-type='playlist' data-fixed='true' data-mini='true' data-listFolded='true' data-order='random' data-preload='auto' data-autoplay='false' data-volume = '0.5' data-lrc-type='0'   muted></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config_change',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  if (typeof gtag === 'function') {
+    gtag('config', '', {'page_path': window.location.pathname});
+  }
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+
+document.addEventListener('pjax:send', function () {
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})</script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  bp.dataset.pjax = ''
+  const s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})()</script></div></body></html>

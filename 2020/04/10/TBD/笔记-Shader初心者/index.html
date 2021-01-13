@@ -1,0 +1,849 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>[笔记]Shader初心者 | NGGames | 造梦者</title><meta name="robots" content="noindex"><meta name="keywords" content="Unity,Shader,特效"><meta name="author" content="Daachun"><meta name="copyright" content="Daachun"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="常见速查SubShader TagsTags&amp;#123;&quot;Queue&quot; &#x3D; &quot;Geometry&quot; &quot;RenderType&quot; &#x3D; &quot;&quot;&amp;#125; Queue Background：1000，最先进行渲染 Geometry：2000，常用于不透明对象 AlphaTest：2450，要么完全透明，要么完全不透明。用于利用贴">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[笔记]Shader初心者">
+<meta property="og:url" content="http://daachun.com/2020/04/10/TBD/%E7%AC%94%E8%AE%B0-Shader%E5%88%9D%E5%BF%83%E8%80%85/index.html">
+<meta property="og:site_name" content="NGGames | 造梦者">
+<meta property="og:description" content="常见速查SubShader TagsTags&amp;#123;&quot;Queue&quot; &#x3D; &quot;Geometry&quot; &quot;RenderType&quot; &#x3D; &quot;&quot;&amp;#125; Queue Background：1000，最先进行渲染 Geometry：2000，常用于不透明对象 AlphaTest：2450，要么完全透明，要么完全不透明。用于利用贴">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210255.png">
+<meta property="article:published_time" content="2020-04-10T08:59:50.000Z">
+<meta property="article:modified_time" content="2020-10-13T12:09:45.566Z">
+<meta property="article:author" content="Daachun">
+<meta property="article:tag" content="Unity">
+<meta property="article:tag" content="Shader">
+<meta property="article:tag" content="特效">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210255.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://daachun.com/2020/04/10/TBD/%E7%AC%94%E8%AE%B0-Shader%E5%88%9D%E5%BF%83%E8%80%85/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="preconnect" href="//zz.bdstatic.com"/><meta name="baidu-site-verification" content="BfQAZEFBNX"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-right"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-10-13 20:09:45'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}const fontSizeVal = saveToLocal.get('global-font-size')
+if (fontSizeVal !== undefined) {
+  document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+}})()</script><style type="text/css">#toggle-sidebar {bottom: 80px}</style><meta name="generator" content="Hexo 5.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/205247.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">34</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-file"></i><span> 博客</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://tableconvert.com/"><i class="fa-fw fas fa-table"></i><span> 表格生成</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-heartbeat"></i><span> 喜欢</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://leetcode-cn.com/"><i class="fa-fw fas fa-code"></i><span> 去刷题</span></a></li><li><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-photo-video"></i><span> 相册</span></a></li><li><a class="site-page" href="/IdeaGenerator/"><i class="fa-fw fas fa-lightbulb"></i><span> 狗屁不通</span></a></li><li><a class="site-page" href="/proj/"><i class="fa-fw fas fa-tasks"></i><span> 项目发布</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-film"></i><span> 追番</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://mo.fish/"><i class="fa-fw fas fa-thumbs-up"></i><span> 摸鱼</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210255.png)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">NGGames | 造梦者</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-file"></i><span> 博客</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://tableconvert.com/"><i class="fa-fw fas fa-table"></i><span> 表格生成</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-heartbeat"></i><span> 喜欢</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://leetcode-cn.com/"><i class="fa-fw fas fa-code"></i><span> 去刷题</span></a></li><li><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-photo-video"></i><span> 相册</span></a></li><li><a class="site-page" href="/IdeaGenerator/"><i class="fa-fw fas fa-lightbulb"></i><span> 狗屁不通</span></a></li><li><a class="site-page" href="/proj/"><i class="fa-fw fas fa-tasks"></i><span> 项目发布</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-film"></i><span> 追番</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://mo.fish/"><i class="fa-fw fas fa-thumbs-up"></i><span> 摸鱼</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">[笔记]Shader初心者</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-04-10T08:59:50.000Z" title="发表于 2020-04-10 16:59:50">2020-04-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-10-13T12:09:45.566Z" title="更新于 2020-10-13 20:09:45">2020-10-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="常见速查"><a href="#常见速查" class="headerlink" title="常见速查"></a>常见速查</h1><h2 id="SubShader-Tags"><a href="#SubShader-Tags" class="headerlink" title="SubShader Tags"></a>SubShader Tags</h2><p><code>Tags&#123;&quot;Queue&quot; = &quot;Geometry&quot; &quot;RenderType&quot; = &quot;&quot;&#125;</code></p>
+<h3 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h3><ul>
+<li>Background：1000，最先进行渲染</li>
+<li>Geometry：2000，常用于不透明对象</li>
+<li>AlphaTest：2450，要么完全透明，要么完全不透明。用于利用贴图来实现边缘透明的效果</li>
+<li>Transparent：3000，半透明对象，从后往前渲染</li>
+<li>Overlay：4000，用于叠加效果，最后渲染的东西放在这里</li>
+</ul>
+<p>可以这么写：<code>Tags&#123; &quot;Queue&quot; = &quot;Geometry+1&quot; &#125;</code></p>
+<p>注意：在Unity中，渲染队列小于2500的被认为是不透明的物体，从前往后绘制；其他的队列的物体是从后往前绘制的。我们需要尽可能把物体的队列设置为不透明物体的渲染队列，尽量避免重复绘制。</p>
+<h3 id="RenderType"><a href="#RenderType" class="headerlink" title="RenderType"></a>RenderType</h3><ul>
+<li>Opaque</li>
+<li>Transparent</li>
+<li>TransparentCutout</li>
+<li>Background</li>
+<li>Overlay</li>
+<li>TreeOpaque</li>
+<li>TreeTransparentCutout</li>
+<li>TreeBillboard</li>
+<li>Grass</li>
+<li>GrassBillboard</li>
+</ul>
+<p>本质上是一种内部约定，用于区别这个Shader要渲染的对象是属于什么类别的。可以自定义。</p>
+<p>作用是可以通过<code>Camera.SetReplacementShader()</code>来更改最终的渲染效果：</p>
+<figure class="highlight cs"><table><tr><td class="code"><pre><span class="line">camera.SetReplacementShader(EffectShader, Tag);</span><br></pre></td></tr></table></figure>
+<p>EffectShader是需要渲染的Shader，Tag是用来筛选渲染对象的。如果Tag为空，表示全部物体Shader都替换成EffectShader进行渲染。</p>
+<h3 id="UnityCG-cginc"><a href="#UnityCG-cginc" class="headerlink" title="UnityCG.cginc"></a>UnityCG.cginc</h3><p>常用的一些帮助函数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">float3 WorldSpaceViewDir(float4 v) &#x2F;&#x2F; 输入一个模型空间中的顶点位置(v.vertex)，返回世界空间中从该点刀摄像机的观察方向</span><br><span class="line">float3 UnityWorldSpaceViewDir</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="Cg-HLSL"><a href="#Cg-HLSL" class="headerlink" title="Cg/HLSL"></a>Cg/HLSL</h2><h3 id="类型对应"><a href="#类型对应" class="headerlink" title="类型对应"></a>类型对应</h3><table>
+<thead>
+<tr>
+<th>Properties</th>
+<th>Cg/HLSL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Int/float/Range</td>
+<td>float/half/fixed 根据需要的精度</td>
+</tr>
+<tr>
+<td>Vector/Color</td>
+<td>float4/half4/fixed4</td>
+</tr>
+<tr>
+<td>2D</td>
+<td>sampler2D</td>
+</tr>
+<tr>
+<td>3D</td>
+<td>sampler3D</td>
+</tr>
+<tr>
+<td>CUBE</td>
+<td>samplerCUBE</td>
+</tr>
+</tbody></table>
+<h3 id="常见的几种数据类型"><a href="#常见的几种数据类型" class="headerlink" title="常见的几种数据类型"></a>常见的几种数据类型</h3><p><a target="_blank" rel="noopener" href="https://connect.unity.com/p/ling-ji-chu-ru-men-unity-shader-liu">源</a></p>
+<ul>
+<li>float/half/fixed（浮点数）</li>
+<li>integer（整型）</li>
+<li>sampler2D（2D纹理）</li>
+<li>samplerCUBE（3D纹理）</li>
+</ul>
+<p><strong>float</strong></p>
+<p>高精度，32位，通常用于世界坐标下的位置，纹理UV，或涉及复杂函数的标量计算（三角函数、幂运算等）。</p>
+<p><strong>half</strong></p>
+<p>中精度，16位，数值范围[-60000, +60000]，通常用于本地坐标下的位置、方向向量、HDR颜色等。</p>
+<p><strong>fixed</strong></p>
+<p>低精度，11位，数值范围为[-2, +2]，通常用于常规的颜色与贴图，以及低精度间的一些运算变量等。</p>
+<p>比较常用的一个规则：除了位置和坐标用float以外，其余的全部用half。原因是因为大部分的现代GPU只支持32位与16位，也就是说只支持float和half，不支持fixed。</p>
+<p><strong>interger</strong></p>
+<p>整型类型，通常用于循环与数组的索引。</p>
+<p><strong>sampler2D、sampler3D与samplerCUBE</strong></p>
+<p>纹理，默认情况下在移动平台纹理会自动转换成低精度的纹理类型。如果需要中精度或者高精度的需要单独声明：</p>
+<ul>
+<li>sampler2D_half    (中精度2D纹理)</li>
+<li>sampler2D_float   (高精度2D纹理)</li>
+<li>sampler3D_half    (中精度3D纹理)</li>
+<li>sampler3D_float   (高精度3D纹理)</li>
+<li>samplerCUBE_half (中精度立方体纹理)</li>
+<li>samplerCUBE_float (高精度立方体纹理)</li>
+</ul>
+<h3 id="UV棋盘格"><a href="#UV棋盘格" class="headerlink" title="UV棋盘格"></a>UV棋盘格</h3><figure class="highlight cs"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fixed</span> <span class="title">checker</span>(<span class="params">float2 uv</span>)</span></span><br><span class="line"><span class="function"></span>			&#123;</span><br><span class="line">				float2 repeatUV = uv * <span class="number">10</span>;</span><br><span class="line">				float2 c = floor(repeatUV) / <span class="number">2</span>;</span><br><span class="line">				<span class="built_in">float</span> checker = frac(c.x + c.y) * <span class="number">2</span>;</span><br><span class="line">				<span class="keyword">return</span> checker;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>2 = floor(2.9)</code></p>
+<p><code>3 = ceil(2.1)</code></p>
+<h3 id="HLSL内置函数速查"><a href="#HLSL内置函数速查" class="headerlink" title="HLSL内置函数速查"></a>HLSL内置函数速查</h3><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Syntax</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>abs</td>
+<td>abs(x)</td>
+<td>Absolute value (per component).</td>
+</tr>
+<tr>
+<td>acos</td>
+<td>acos(x)</td>
+<td>Returns the arccosine of each component of x.</td>
+</tr>
+<tr>
+<td>all</td>
+<td>all(x)</td>
+<td>Test if all components of x are nonzero.</td>
+</tr>
+<tr>
+<td>any</td>
+<td>any(x)</td>
+<td>Test if any component of x is nonzero.</td>
+</tr>
+<tr>
+<td>asfloat</td>
+<td>asfloat(x)</td>
+<td>Convert the input type to a float.</td>
+</tr>
+<tr>
+<td>asin</td>
+<td>asin(x)</td>
+<td>Returns the arcsine of each component of x.</td>
+</tr>
+<tr>
+<td>asint</td>
+<td>asint(x)</td>
+<td>Convert the input type to an integer.</td>
+</tr>
+<tr>
+<td>asuint</td>
+<td>asuint(x)</td>
+<td>Convert the input type to an unsigned integer.</td>
+</tr>
+<tr>
+<td>atan</td>
+<td>atan(x)</td>
+<td>Returns the arctangent of x.</td>
+</tr>
+<tr>
+<td>atan2</td>
+<td>atan2(y, x)</td>
+<td>Returns the arctangent of of two values (x,y).</td>
+</tr>
+<tr>
+<td>ceil</td>
+<td>ceil(x)</td>
+<td>Returns the smallest integer which is greater than or equal to x.</td>
+</tr>
+<tr>
+<td>clamp</td>
+<td>clamp(x, min, max)</td>
+<td>Clamps x to the range [min, max].</td>
+</tr>
+<tr>
+<td>clip</td>
+<td>clip(x)</td>
+<td>Discards the current pixel, if any component of x is less than zero.</td>
+</tr>
+<tr>
+<td>cos</td>
+<td>cos(x)</td>
+<td>Returns the cosine of x.</td>
+</tr>
+<tr>
+<td>cosh</td>
+<td>cosh(x)</td>
+<td>Returns the hyperbolic cosine of x.</td>
+</tr>
+<tr>
+<td>cross</td>
+<td>cross(x, y)</td>
+<td>Returns the cross product of two 3D vectors.</td>
+</tr>
+<tr>
+<td>D3DCOLORtoUBYTE4</td>
+<td>D3DCOLORtoUBYTE4(x)</td>
+<td>Swizzles and scales components of the 4D vector x to compensate for the lack of UBYTE4 support in some hardware.</td>
+</tr>
+<tr>
+<td>ddx</td>
+<td>ddx(x)</td>
+<td>Returns the partial derivative of x with respect to the screen-space x-coordinate.</td>
+</tr>
+<tr>
+<td>ddy</td>
+<td>ddy(x)</td>
+<td>Returns the partial derivative of x with respect to the screen-space y-coordinate.</td>
+</tr>
+<tr>
+<td>degrees</td>
+<td>degrees(x)</td>
+<td>Converts x from radians to degrees.</td>
+</tr>
+<tr>
+<td>determinant</td>
+<td>determinant(m)</td>
+<td>Returns the determinant of the square matrix m.</td>
+</tr>
+<tr>
+<td>distance</td>
+<td>distance(x, y)</td>
+<td>Returns the distance between two points.</td>
+</tr>
+<tr>
+<td>dot</td>
+<td>dot(x, y)</td>
+<td>Returns the dot product of two vectors.</td>
+</tr>
+<tr>
+<td>exp</td>
+<td>exp(x)</td>
+<td>Returns the base-e exponent.</td>
+</tr>
+<tr>
+<td>exp2</td>
+<td>exp2(x)</td>
+<td>Base 2 exponent (per component).</td>
+</tr>
+<tr>
+<td>faceforward</td>
+<td>faceforward(n, i, ng)</td>
+<td>Returns -n * sign(•(i, ng)).</td>
+</tr>
+<tr>
+<td>floor</td>
+<td>floor(x)</td>
+<td>Returns the greatest integer which is less than or equal to x.</td>
+</tr>
+<tr>
+<td>fmod</td>
+<td>fmod(x, y)</td>
+<td>Returns the floating point remainder of x/y.</td>
+</tr>
+<tr>
+<td>frac</td>
+<td>frac(x)</td>
+<td>Returns the fractional part of x.</td>
+</tr>
+<tr>
+<td>frexp</td>
+<td>frexp(x, exp)</td>
+<td>Returns the mantissa and exponent of x.</td>
+</tr>
+<tr>
+<td>fwidth</td>
+<td>fwidth(x)</td>
+<td>Returns abs(ddx(x)) + abs(ddy(x))</td>
+</tr>
+<tr>
+<td>GetRenderTargetSampleCount</td>
+<td>GetRenderTargetSampleCount()</td>
+<td>Returns the number of render-target samples.</td>
+</tr>
+<tr>
+<td>GetRenderTargetSamplePosition</td>
+<td>GetRenderTargetSamplePosition(x)</td>
+<td>Returns a sample position (x,y) for a given sample index.</td>
+</tr>
+<tr>
+<td>isfinite</td>
+<td>isfinite(x)</td>
+<td>Returns true if x is finite, false otherwise.</td>
+</tr>
+<tr>
+<td>isinf</td>
+<td>isinf(x)</td>
+<td>Returns true if x is +INF or -INF, false otherwise.</td>
+</tr>
+<tr>
+<td>isnan</td>
+<td>isnan(x)</td>
+<td>Returns true if x is NAN or QNAN, false otherwise.</td>
+</tr>
+<tr>
+<td>ldexp</td>
+<td>ldexp(x, exp)</td>
+<td>Returns x * 2exp</td>
+</tr>
+<tr>
+<td>length</td>
+<td>length(v)</td>
+<td>Returns the length of the vector v.</td>
+</tr>
+<tr>
+<td>lerp</td>
+<td>lerp(x, y, s)</td>
+<td>Returns x + s(y - x).</td>
+</tr>
+<tr>
+<td>lit</td>
+<td>lit(n • l, n • h, m)</td>
+<td>Returns a lighting vector (ambient, diffuse, specular, 1)</td>
+</tr>
+<tr>
+<td>log</td>
+<td>log(x)</td>
+<td>Returns the base-e logarithm of x.</td>
+</tr>
+<tr>
+<td>log10</td>
+<td>log10(x)</td>
+<td>Returns the base-10 logarithm of x.</td>
+</tr>
+<tr>
+<td>log2</td>
+<td>log2(x)</td>
+<td>Returns the base-2 logarithm of x.</td>
+</tr>
+<tr>
+<td>max</td>
+<td>max(x, y)</td>
+<td>Selects the greater of x and y.</td>
+</tr>
+<tr>
+<td>min</td>
+<td>min(x, y)</td>
+<td>Selects the lesser of x and y.</td>
+</tr>
+<tr>
+<td>modf</td>
+<td>modf(x, out ip)</td>
+<td>Splits the value x into fractional and integer parts.</td>
+</tr>
+<tr>
+<td>mul</td>
+<td>mul(x, y)</td>
+<td>Performs matrix multiplication using x and y.</td>
+</tr>
+<tr>
+<td>noise</td>
+<td>noise(x)</td>
+<td>Generates a random value using the Perlin-noise algorithm.</td>
+</tr>
+<tr>
+<td>normalize</td>
+<td>normalize(x)</td>
+<td>Returns a normalized vector.</td>
+</tr>
+<tr>
+<td>pow</td>
+<td>pow(x, y)</td>
+<td>Returns xy.</td>
+</tr>
+<tr>
+<td>radians</td>
+<td>radians(x)</td>
+<td>Converts x from degrees to radians.</td>
+</tr>
+<tr>
+<td>reflect</td>
+<td>reflect(i, n)</td>
+<td>Returns a reflection vector.</td>
+</tr>
+<tr>
+<td>refract</td>
+<td>refract(i, n, R)</td>
+<td>Returns the refraction vector.</td>
+</tr>
+<tr>
+<td>round</td>
+<td>round(x)</td>
+<td>Rounds x to the nearest integer</td>
+</tr>
+<tr>
+<td>rsqrt</td>
+<td>rsqrt(x)</td>
+<td>Returns 1 / sqrt(x)</td>
+</tr>
+<tr>
+<td>saturate</td>
+<td>saturate(x)</td>
+<td>Clamps x to the range [0, 1]</td>
+</tr>
+<tr>
+<td>sign</td>
+<td>sign(x)</td>
+<td>Computes the sign of x.</td>
+</tr>
+<tr>
+<td>sin</td>
+<td>sin(x)</td>
+<td>Returns the sine of x</td>
+</tr>
+<tr>
+<td>sincos</td>
+<td>sincos(x, out s, out c)</td>
+<td>Returns the sine and cosine of x.</td>
+</tr>
+<tr>
+<td>sinh</td>
+<td>sinh(x)</td>
+<td>Returns the hyperbolic sine of x</td>
+</tr>
+<tr>
+<td>smoothstep</td>
+<td>smoothstep(min, max, x)</td>
+<td>Returns a smooth Hermite interpolation between 0 and 1.</td>
+</tr>
+<tr>
+<td>sqrt</td>
+<td>sqrt(x)</td>
+<td>Square root (per component)</td>
+</tr>
+<tr>
+<td>step</td>
+<td>step(a, x)</td>
+<td>Returns (x &gt;= a) ? 1 : 0</td>
+</tr>
+<tr>
+<td>tan</td>
+<td>tan(x)</td>
+<td>Returns the tangent of x</td>
+</tr>
+<tr>
+<td>tanh</td>
+<td>tanh(x)</td>
+<td>Returns the hyperbolic tangent of x</td>
+</tr>
+<tr>
+<td>tex1D</td>
+<td>tex1D(s, t)</td>
+<td>1D texture lookup.</td>
+</tr>
+<tr>
+<td>tex1Dbias</td>
+<td>tex1Dbias(s, t)</td>
+<td>1D texture lookup with bias.</td>
+</tr>
+<tr>
+<td>tex1Dgrad</td>
+<td>tex1Dgrad(s, t, ddx, ddy)</td>
+<td>1D texture lookup with a gradient.</td>
+</tr>
+<tr>
+<td>tex1Dlod</td>
+<td>tex1Dlod(s, t)</td>
+<td>1D texture lookup with LOD.</td>
+</tr>
+<tr>
+<td>tex1Dproj</td>
+<td>tex1Dproj(s, t)</td>
+<td>1D texture lookup with projective divide.</td>
+</tr>
+<tr>
+<td>tex2D</td>
+<td>tex2D(s, t)</td>
+<td>2D texture lookup.</td>
+</tr>
+<tr>
+<td>tex2Dbias</td>
+<td>tex2Dbias(s, t)</td>
+<td>2D texture lookup with bias.</td>
+</tr>
+<tr>
+<td>tex2Dgrad</td>
+<td>tex2Dgrad(s, t, ddx, ddy)</td>
+<td>2D texture lookup with a gradient.</td>
+</tr>
+<tr>
+<td>tex2Dlod</td>
+<td>tex2Dlod(s, t)</td>
+<td>2D texture lookup with LOD.</td>
+</tr>
+<tr>
+<td>tex2Dproj</td>
+<td>tex2Dproj(s, t)</td>
+<td>2D texture lookup with projective divide.</td>
+</tr>
+<tr>
+<td>tex3D</td>
+<td>tex3D(s, t)</td>
+<td>3D texture lookup.</td>
+</tr>
+<tr>
+<td>tex3Dbias</td>
+<td>tex3Dbias(s, t)</td>
+<td>3D texture lookup with bias.</td>
+</tr>
+<tr>
+<td>tex3Dgrad</td>
+<td>tex3Dgrad(s, t, ddx, ddy)</td>
+<td>3D texture lookup with a gradient.</td>
+</tr>
+<tr>
+<td>tex3Dlod</td>
+<td>tex3Dlod(s, t)</td>
+<td>3D texture lookup with LOD.</td>
+</tr>
+<tr>
+<td>tex3Dproj</td>
+<td>tex3Dproj(s, t)</td>
+<td>3D texture lookup with projective divide.</td>
+</tr>
+<tr>
+<td>texCUBE</td>
+<td>texCUBE(s, t)</td>
+<td>Cube texture lookup.</td>
+</tr>
+<tr>
+<td>texCUBEbias</td>
+<td>texCUBEbias(s, t)</td>
+<td>Cube texture lookup with bias.</td>
+</tr>
+<tr>
+<td>texCUBEgrad</td>
+<td>texCUBEgrad(s, t, ddx, ddy)</td>
+<td>Cube texture lookup with a gradient.</td>
+</tr>
+<tr>
+<td>texCUBElod</td>
+<td>tex3Dlod(s, t)</td>
+<td>Cube texture lookup with LOD.</td>
+</tr>
+<tr>
+<td>texCUBEproj</td>
+<td>texCUBEproj(s, t)</td>
+<td>Cube texture lookup with projective divide.</td>
+</tr>
+<tr>
+<td>transpose</td>
+<td>transpose(m)</td>
+<td>Returns the transpose of the matrix m.</td>
+</tr>
+<tr>
+<td>trunc</td>
+<td>trunc(x)</td>
+<td>Truncates floating-point value(s) to integer value(s)</td>
+</tr>
+</tbody></table>
+<h3 id="appdata语义"><a href="#appdata语义" class="headerlink" title="appdata语义"></a>appdata语义</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">struct appdata</span><br><span class="line">	&#123;</span><br><span class="line">		float4 vertex : POSITION;		&#x2F;&#x2F;顶点</span><br><span class="line">		float4 tangent : TANGENT;		&#x2F;&#x2F;切线</span><br><span class="line">		float3 normal : NORMAL;			&#x2F;&#x2F;法线</span><br><span class="line">		float4 texcoord : TEXCOORD0;	        &#x2F;&#x2F;UV1</span><br><span class="line">		float4 texcoord1 : TEXCOORD1;	        &#x2F;&#x2F;UV2</span><br><span class="line">		float4 texcoord2 : TEXCOORD2;	        &#x2F;&#x2F;UV3</span><br><span class="line">		float4 texcoord3 : TEXCOORD3;	        &#x2F;&#x2F;UV4</span><br><span class="line">		fixed4 color : COLOR;			&#x2F;&#x2F;顶点色</span><br><span class="line">	&#125;;</span><br></pre></td></tr></table></figure>
+
+
+<!-- flag of hidden posts --></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Daachun</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://daachun.com/2020/04/10/TBD/%E7%AC%94%E8%AE%B0-Shader%E5%88%9D%E5%BF%83%E8%80%85/">http://daachun.com/2020/04/10/TBD/%E7%AC%94%E8%AE%B0-Shader%E5%88%9D%E5%BF%83%E8%80%85/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://daachun.com" target="_blank">NGGames | 造梦者</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Unity/">Unity</a><a class="post-meta__tags" href="/tags/Shader/">Shader</a><a class="post-meta__tags" href="/tags/%E7%89%B9%E6%95%88/">特效</a></div><div class="post_share"><div class="social-share" data-image="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210255.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/01/13/[笔记]学习资源记录/" title="[笔记]学习资源记录"><img class="cover" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210517.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-13</div><div class="title">[笔记]学习资源记录</div></div></a></div><div><a href="/2020/07/23/Unity/Unity-Bolt免费啦！/" title="[Unity]Bolt免费啦！"><img class="cover" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200723103138.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-23</div><div class="title">[Unity]Bolt免费啦！</div></div></a></div><div><a href="/2020/08/03/Unity/Unity-Bolt学习资源推荐/" title="[Unity]Bolt学习资源推荐"><img class="cover" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200803201438.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-03</div><div class="title">[Unity]Bolt学习资源推荐</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/205247.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Daachun</div><div class="author-info__description">不想成为策划的美术不是好程序！</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">34</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=649856329&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://steamcommunity.com/id/daachun/" target="_blank" title="Steam"><i class="fab fa-steam"></i></a><a class="social-icon" href="mailto:649856329@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://github.com/Daachun" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%80%9F%E6%9F%A5"><span class="toc-number">1.</span> <span class="toc-text">常见速查</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SubShader-Tags"><span class="toc-number">1.1.</span> <span class="toc-text">SubShader Tags</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Queue"><span class="toc-number">1.1.1.</span> <span class="toc-text">Queue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RenderType"><span class="toc-number">1.1.2.</span> <span class="toc-text">RenderType</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UnityCG-cginc"><span class="toc-number">1.1.3.</span> <span class="toc-text">UnityCG.cginc</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cg-HLSL"><span class="toc-number">1.2.</span> <span class="toc-text">Cg&#x2F;HLSL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E5%AF%B9%E5%BA%94"><span class="toc-number">1.2.1.</span> <span class="toc-text">类型对应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E5%87%A0%E7%A7%8D%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.2.</span> <span class="toc-text">常见的几种数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UV%E6%A3%8B%E7%9B%98%E6%A0%BC"><span class="toc-number">1.2.3.</span> <span class="toc-text">UV棋盘格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HLSL%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0%E9%80%9F%E6%9F%A5"><span class="toc-number">1.2.4.</span> <span class="toc-text">HLSL内置函数速查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#appdata%E8%AF%AD%E4%B9%89"><span class="toc-number">1.2.5.</span> <span class="toc-text">appdata语义</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/01/13/%5B%E7%AC%94%E8%AE%B0%5D%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E8%AE%B0%E5%BD%95/" title="[笔记]学习资源记录"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210517.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[笔记]学习资源记录"/></a><div class="content"><a class="title" href="/2021/01/13/%5B%E7%AC%94%E8%AE%B0%5D%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E8%AE%B0%E5%BD%95/" title="[笔记]学习资源记录">[笔记]学习资源记录</a><time datetime="2021-01-13T04:12:27.000Z" title="发表于 2021-01-13 12:12:27">2021-01-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/11/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B0-100%E5%B1%82%E6%A5%BC%E6%91%942%E4%B8%AA%E8%8B%B9%E6%9E%9C%EF%BC%9F%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%A1%86%E6%9E%B6/" title="笔记-100层楼摔2个苹果？动态规划框架"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201113191346.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="笔记-100层楼摔2个苹果？动态规划框架"/></a><div class="content"><a class="title" href="/2020/11/11/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B0-100%E5%B1%82%E6%A5%BC%E6%91%942%E4%B8%AA%E8%8B%B9%E6%9E%9C%EF%BC%9F%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%A1%86%E6%9E%B6/" title="笔记-100层楼摔2个苹果？动态规划框架">笔记-100层楼摔2个苹果？动态规划框架</a><time datetime="2020-11-11T09:11:22.000Z" title="发表于 2020-11-11 17:11:22">2020-11-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/06/Unity/Unity-%E5%90%88%E7%90%86%E4%BC%98%E5%8C%96Unity%E7%9A%84GC/" title="Unity-合理优化Unity的GC"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201108005923.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Unity-合理优化Unity的GC"/></a><div class="content"><a class="title" href="/2020/11/06/Unity/Unity-%E5%90%88%E7%90%86%E4%BC%98%E5%8C%96Unity%E7%9A%84GC/" title="Unity-合理优化Unity的GC">Unity-合理优化Unity的GC</a><time datetime="2020-11-06T08:50:10.000Z" title="发表于 2020-11-06 16:50:10">2020-11-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/03/Unity/Unity-%E9%A1%B9%E7%9B%AE%E7%BA%A6%E5%AE%9A/" title="Unity-项目约定"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201103095215.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Unity-项目约定"/></a><div class="content"><a class="title" href="/2020/11/03/Unity/Unity-%E9%A1%B9%E7%9B%AE%E7%BA%A6%E5%AE%9A/" title="Unity-项目约定">Unity-项目约定</a><time datetime="2020-11-03T01:49:48.000Z" title="发表于 2020-11-03 09:49:48">2020-11-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/10/26/Unity/VR%E5%BC%80%E5%8F%91-Unity2019%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84CardboardVR%E5%BC%80%E5%8F%91/" title="VR开发-Unity2019环境下的Cardboard VR开发"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201028090652.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="VR开发-Unity2019环境下的Cardboard VR开发"/></a><div class="content"><a class="title" href="/2020/10/26/Unity/VR%E5%BC%80%E5%8F%91-Unity2019%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84CardboardVR%E5%BC%80%E5%8F%91/" title="VR开发-Unity2019环境下的Cardboard VR开发">VR开发-Unity2019环境下的Cardboard VR开发</a><time datetime="2020-10-26T09:50:15.000Z" title="发表于 2020-10-26 17:50:15">2020-10-26</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210255.png)"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2021 By Daachun</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.spacingElementById('content-inner')
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.spacingElementById('content-inner')
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: '8CFscafTjfjGcsilNQmda6vv-gzGzoHsz',
+      appKey: 'LJAnvsSfSunbV8eX0IvJn0F8',
+      placeholder: '请尽情评论吧！',
+      avatar: 'identicon',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign(initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><style>.aplayer.no-destroy.no-reload.aplayer-withlist.aplayer-fixed.aplayer-narrow .aplayer-body{left:-66px!important;}.aplayer.no-destroy.no-reload.aplayer-withlist.aplayer-fixed.aplayer-narrow .aplayer-body:hover{left:0px!important}</style><div class="aplayer no-destroy" data-id="34194010" data-server="netease" data-type='playlist' data-fixed='true' data-mini='true' data-listFolded='true' data-order='random' data-preload='auto' data-autoplay='false' data-volume = '0.5' data-lrc-type='0'   muted></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config_change',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  if (typeof gtag === 'function') {
+    gtag('config', '', {'page_path': window.location.pathname});
+  }
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+
+document.addEventListener('pjax:send', function () {
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})</script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  bp.dataset.pjax = ''
+  const s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})()</script></div></body></html>

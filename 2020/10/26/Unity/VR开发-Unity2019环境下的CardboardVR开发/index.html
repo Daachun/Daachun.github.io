@@ -1,0 +1,405 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VR开发-Unity2019环境下的Cardboard VR开发 | NGGames | 造梦者</title><meta name="keywords" content="Unity,VR开发,虚拟现实,Android,Cardboard"><meta name="author" content="Daachun"><meta name="copyright" content="Daachun"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="由于UnityXR框架的出现，Unity2019中的AndroidVR开发变得奇怪起来，这篇文章从环境配置出发，用Unity2019和GoogleXR包一步一步实现一个VR全景程序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VR开发-Unity2019环境下的Cardboard VR开发">
+<meta property="og:url" content="http://daachun.com/2020/10/26/Unity/VR%E5%BC%80%E5%8F%91-Unity2019%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84CardboardVR%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="NGGames | 造梦者">
+<meta property="og:description" content="由于UnityXR框架的出现，Unity2019中的AndroidVR开发变得奇怪起来，这篇文章从环境配置出发，用Unity2019和GoogleXR包一步一步实现一个VR全景程序">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201028090652.png">
+<meta property="article:published_time" content="2020-10-26T09:50:15.000Z">
+<meta property="article:modified_time" content="2020-10-28T01:35:56.996Z">
+<meta property="article:author" content="Daachun">
+<meta property="article:tag" content="Unity">
+<meta property="article:tag" content="VR开发">
+<meta property="article:tag" content="虚拟现实">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="Cardboard">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201028090652.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://daachun.com/2020/10/26/Unity/VR%E5%BC%80%E5%8F%91-Unity2019%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84CardboardVR%E5%BC%80%E5%8F%91/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="preconnect" href="//zz.bdstatic.com"/><meta name="baidu-site-verification" content="BfQAZEFBNX"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-right"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-10-28 09:35:56'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}const fontSizeVal = saveToLocal.get('global-font-size')
+if (fontSizeVal !== undefined) {
+  document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+}})()</script><style type="text/css">#toggle-sidebar {bottom: 80px}</style><meta name="generator" content="Hexo 5.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/205247.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">34</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-file"></i><span> 博客</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://tableconvert.com/"><i class="fa-fw fas fa-table"></i><span> 表格生成</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-heartbeat"></i><span> 喜欢</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://leetcode-cn.com/"><i class="fa-fw fas fa-code"></i><span> 去刷题</span></a></li><li><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-photo-video"></i><span> 相册</span></a></li><li><a class="site-page" href="/IdeaGenerator/"><i class="fa-fw fas fa-lightbulb"></i><span> 狗屁不通</span></a></li><li><a class="site-page" href="/proj/"><i class="fa-fw fas fa-tasks"></i><span> 项目发布</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-film"></i><span> 追番</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://mo.fish/"><i class="fa-fw fas fa-thumbs-up"></i><span> 摸鱼</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201028090652.png)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">NGGames | 造梦者</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-file"></i><span> 博客</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://tableconvert.com/"><i class="fa-fw fas fa-table"></i><span> 表格生成</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-heartbeat"></i><span> 喜欢</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://leetcode-cn.com/"><i class="fa-fw fas fa-code"></i><span> 去刷题</span></a></li><li><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-photo-video"></i><span> 相册</span></a></li><li><a class="site-page" href="/IdeaGenerator/"><i class="fa-fw fas fa-lightbulb"></i><span> 狗屁不通</span></a></li><li><a class="site-page" href="/proj/"><i class="fa-fw fas fa-tasks"></i><span> 项目发布</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-film"></i><span> 追番</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://mo.fish/"><i class="fa-fw fas fa-thumbs-up"></i><span> 摸鱼</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">VR开发-Unity2019环境下的Cardboard VR开发</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-10-26T09:50:15.000Z" title="发表于 2020-10-26 17:50:15">2020-10-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-10-28T01:35:56.996Z" title="更新于 2020-10-28 09:35:56">2020-10-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Unity/">Unity</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="简要介绍"><a href="#简要介绍" class="headerlink" title="简要介绍"></a>简要介绍</h1><p>Google的Cardboard SDK可以将安卓手机变为VR显示设备，配合Cardboard（那种插手机的VR眼镜），可以给用户一个低成本的VR体验。</p>
+<p>然而，Unity在2020版本又一个大刀阔斧的改革：删除了Build-in的VR支持（如下图）。</p>
+<p><img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201026184346.png" alt="Unity删除了Project Settings里面的XR相关"></p>
+<h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><h2 id="新建项目和导入插件"><a href="#新建项目和导入插件" class="headerlink" title="新建项目和导入插件"></a>新建项目和导入插件</h2><p>这个项目使用的Unity版本是：<strong>Unity 2019.4.13f1c1</strong></p>
+<p>下载Unity现在要通过Unity Hub，并添加Android发布套件。</p>
+<p><img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201026180201.png" alt="Unity2019需要安装Android组件"></p>
+<p>Android开发环境使用自带的OpenJDK。</p>
+<p>我们使用Unity的<strong>Package Manager（包管理器）</strong>来导入SDK。使用这个方法，就<strong>一定要安装Git</strong>。</p>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://git-scm.com/">Git</a> must be installed and the <code>git</code> executable must be on the <code>PATH</code> environment variable. See <a target="_blank" rel="noopener" href="https://docs.unity3d.com/Manual/upm-git.html">Unity’s package manager git support</a> docs for more details.</li>
+</ul>
+</blockquote>
+<p>通过包管理器的<strong>Add package from git URL</strong>选项，将URL粘贴，并添加<strong>Google Cardboard XR Plugin for Unity</strong>这个自定义包。</p>
+<p><code>https://github.com/googlevr/cardboard-xr-plugin.git</code></p>
+<p><img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201026184914.png" alt="从github下载自定义包"></p>
+<p>导入后，找到<strong>Samples &gt; Hello Cardboard</strong>，点击Import导入这个案例包。<img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201028092244.png" alt="导入案例包"></p>
+<p>接下来我们就可以在案例中<code>Assets/Samples/Google Cardboard/&lt;version&gt;/Hello Cardboard/Assets/Scenes</code>找到示例场景了。</p>
+<h2 id="项目详细配置"><a href="#项目详细配置" class="headerlink" title="项目详细配置"></a>项目详细配置</h2><blockquote>
+<p>原文档内容：<a target="_blank" rel="noopener" href="https://developers.google.com/cardboard/develop/unity/quickstart">Cardboard QuickSstart</a></p>
+</blockquote>
+<p>Unity 2019.3版本之前，我们将GoogleVRForUnity的unitypackage导入项目，并打开Player Settings里面的VR支持，选上Cardboard选项就可以进行开发并打包发布了。但现在这样做就会出错。</p>
+<p>项目需要进行详细的配置，才能进行打包发布。这应该是Unity对Android平台支持逐渐强大、领域也逐渐细分的原因，新的XR支持应该也是原因之一。</p>
+<p>步骤简述：导入包-&gt;设置Build Settings-&gt;设置Player Settings-&gt;修改一些文件</p>
+<p>项目设置步骤：</p>
+<ul>
+<li><p>打开<strong>File &gt; Build Settings</strong> 选择安卓平台并切换。将示例场景加入到打包场景中。</p>
+</li>
+<li><p>找到<strong>Project Settings</strong> &gt; <strong>Player</strong> &gt; <strong>Resolution and Presentation</strong>，将 <strong>Default Orientation</strong> 设置为 <strong>Landscape Left</strong>。</p>
+</li>
+<li><p>找到<strong>Project Settings</strong> &gt; <strong>Player</strong> &gt; <strong>Other Settings</strong>：</p>
+<ol>
+<li><p>Graphics APIs中仅留<code>OpenGLES2</code></p>
+</li>
+<li><p>Scripting Backend中选择<code>IL2CPP</code></p>
+</li>
+<li><p>Target Architectures中选择<code>ARMv7</code>和<code>ARM64</code></p>
+</li>
+<li><p>Internet Access中选择<code>Require</code></p>
+</li>
+</ol>
+</li>
+<li><p>记得设置项目的包名（Package Name）</p>
+</li>
+<li><p>找到 <strong>Project Settings &gt; XR Plug-in Management</strong>，勾选<code>Cardboard XR Plugin</code>。</p>
+</li>
+<li><p>找到 <strong>Project Settings</strong> &gt; <strong>Player</strong> &gt; <strong>Publishing Settings</strong>：勾选<code>Custom Main Gradle Template</code></p>
+</li>
+</ul>
+<p><img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201026191036.png" alt="这块用的少"></p>
+<p>找到这个目录，打开这个文件，在<strong>dependencies</strong>添加以下内容：</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">implementation <span class="string">&#x27;com.android.support:appcompat-v7:28.0.0&#x27;</span></span><br><span class="line">implementation <span class="string">&#x27;com.android.support:support-v4:28.0.0&#x27;</span></span><br><span class="line">implementation <span class="string">&#x27;com.google.android.gms:play-services-vision:15.0.2&#x27;</span></span><br><span class="line">implementation <span class="string">&#x27;com.google.protobuf:protobuf-lite:3.0.0&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation fileTree(<span class="attr">dir:</span> <span class="string">&#x27;libs&#x27;</span>, <span class="attr">include:</span> [<span class="string">&#x27;*.jar&#x27;</span>])</span><br><span class="line">**DEPS**</span><br><span class="line">  implementation <span class="string">&#x27;com.android.support:appcompat-v7:28.0.0&#x27;</span></span><br><span class="line">  implementation <span class="string">&#x27;com.android.support:support-v4:28.0.0&#x27;</span></span><br><span class="line">  implementation <span class="string">&#x27;com.google.android.gms:play-services-vision:15.0.2&#x27;</span></span><br><span class="line">  implementation <span class="string">&#x27;com.google.protobuf:protobuf-lite:3.0.0&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>检查一下Target API Level，如果设置成<code>API Level 29</code>或者<code>Automatic(highest installed)</code>落在了29上，那还要进行以下设置：勾选<code>Custom Main Manifest</code>，在这个文件内添加<code>application</code>的tag：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">application</span> <span class="attr">android:requestLegacyExternalStorage</span>=<span class="string">&quot;true&quot;</span> <span class="attr">...</span> &gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<p>至此，Android端Cardboard环境配置完毕。</p>
+<p><img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201026193212.png" alt="发布成功"></p>
+<h2 id="一些需要注意的坑"><a href="#一些需要注意的坑" class="headerlink" title="一些需要注意的坑"></a>一些需要注意的坑</h2><ol>
+<li>API LEVEL 29以下的就不要加android:requestLegacyExternalStorage=”true”标签了。</li>
+</ol>
+<h1 id="实现全景"><a href="#实现全景" class="headerlink" title="实现全景"></a>实现全景</h1><h2 id="天空盒"><a href="#天空盒" class="headerlink" title="天空盒"></a>天空盒</h2><p>找一张全景图，直接拖到天空盒里就行啦！</p>
+<p>这种方式做交互比较麻烦，天空盒很远，比较难对应上位置。</p>
+<h2 id="法线向内的球"><a href="#法线向内的球" class="headerlink" title="法线向内的球"></a>法线向内的球</h2><p>我们通过Blender来简单创建一个法线向内的球，并将全景图贴到这个球上。</p>
+<ol>
+<li><p>Blender中Shift+A创建一个经纬球，右键设置为平滑着色。</p>
+</li>
+<li><p>Tab进入编辑模式，将球全选，选择网格 &gt; 法相 &gt; 翻转。或者全选面，使用快捷键<code>Alt+n</code>选择翻转。你可以在这里查看法线方向，红色是向内。</p>
+<p><img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201026193928.png" alt="视图叠加层"></p>
+</li>
+<li><p>导出fbx模型，导入Unity。</p>
+</li>
+</ol>
+<h2 id="简单改改Shader"><a href="#简单改改Shader" class="headerlink" title="简单改改Shader"></a>简单改改Shader</h2><p>最近有学一些Shader。针对Unity默认的球，我们可以自己写一个Shader设置设置仅正面剔除。</p>
+<p>直接新建一个Standard Surface Shader，别的不用改，加一句剔除正面就可以了。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Cull Front</span><br></pre></td></tr></table></figure>
+<p><img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201027204318.png" alt="是正面剔除"></p>
+<p>用这个Shader创建一个材质球，放到Unity自带的球上就可以了。</p>
+<p><img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201027224608.png" alt="效果好像还是不太对？内部是正常的"></p>
+<h1 id="实现交互"><a href="#实现交互" class="headerlink" title="实现交互"></a>实现交互</h1><h2 id="凝视交互"><a href="#凝视交互" class="headerlink" title="凝视交互"></a>凝视交互</h2><p>创建一个凝视交互很简单，只要从摄像机发射射线，做一个定时器就可以了。</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span> &#123;</span><br><span class="line">     RaycastHit hit;</span><br><span class="line">     <span class="keyword">if</span> (Physics.Raycast(transform.position, transform.forward, <span class="keyword">out</span> hit, MaxDistance))</span><br><span class="line">     &#123;</span><br><span class="line">         <span class="comment">// 新物体</span></span><br><span class="line">         <span class="keyword">if</span>(pointedObject != hit.transform.gameObject)</span><br><span class="line">         &#123;</span><br><span class="line">             pointedObject = hit.transform.gameObject;</span><br><span class="line">             <span class="comment">// 在这里判断射到新物体时的事件</span></span><br><span class="line">             <span class="comment">// OnPointerEnter</span></span><br><span class="line">         &#125;</span><br><span class="line">         <span class="comment">// if(pointedObject.CompareTag(&quot;tag&quot;))&#123; ... &#125;</span></span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">else</span></span><br><span class="line">     &#123;</span><br><span class="line">         pointedObject = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">// OnPointerExit</span></span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+<p>创建一个Canvas，设置为Camera Space，创建两个Image，一个是十字，另一个是圆形进度条。作为圆形进度条的Image，Image Type设置为Filled，并将定时器的时间映射到Fill Amount上就可以了。</p>
+<p><img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201028085457.png" alt="设置Image Type"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>总的来说，Unity2019环境下的Cardboard开发还是不难的，麻烦的地方在配置环境，其他照旧。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Daachun</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://daachun.com/2020/10/26/Unity/VR%E5%BC%80%E5%8F%91-Unity2019%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84CardboardVR%E5%BC%80%E5%8F%91/">http://daachun.com/2020/10/26/Unity/VR%E5%BC%80%E5%8F%91-Unity2019%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84CardboardVR%E5%BC%80%E5%8F%91/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://daachun.com" target="_blank">NGGames | 造梦者</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Unity/">Unity</a><a class="post-meta__tags" href="/tags/VR%E5%BC%80%E5%8F%91/">VR开发</a><a class="post-meta__tags" href="/tags/%E8%99%9A%E6%8B%9F%E7%8E%B0%E5%AE%9E/">虚拟现实</a><a class="post-meta__tags" href="/tags/Android/">Android</a><a class="post-meta__tags" href="/tags/Cardboard/">Cardboard</a></div><div class="post_share"><div class="social-share" data-image="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201028090652.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/11/03/Unity/Unity-%E9%A1%B9%E7%9B%AE%E7%BA%A6%E5%AE%9A/"><img class="prev-cover" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201103095215.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Unity-项目约定</div></div></a></div><div class="next-post pull-right"><a href="/2020/09/23/%E7%AC%94%E8%AE%B0-%E5%AD%A6%E6%9C%AF%E8%AE%BA%E6%96%87%E7%9A%84%E8%AF%AD%E8%A8%80%E8%A1%A8%E8%BE%BE%E6%80%8E%E6%A0%B7%E6%89%8D%E8%83%BD%E6%9B%B4%E5%AE%B9%E6%98%93%E5%8F%91%E8%A1%A8%EF%BC%9F/"><img class="next-cover" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200923173129.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">[笔记]学术论文的语言表达怎样才能更容易发表？</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/01/13/[笔记]学习资源记录/" title="[笔记]学习资源记录"><img class="cover" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210517.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-13</div><div class="title">[笔记]学习资源记录</div></div></a></div><div><a href="/2020/07/23/Unity/Unity-Bolt免费啦！/" title="[Unity]Bolt免费啦！"><img class="cover" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200723103138.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-23</div><div class="title">[Unity]Bolt免费啦！</div></div></a></div><div><a href="/2020/08/03/Unity/Unity-Bolt学习资源推荐/" title="[Unity]Bolt学习资源推荐"><img class="cover" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200803201438.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-03</div><div class="title">[Unity]Bolt学习资源推荐</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/205247.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Daachun</div><div class="author-info__description">不想成为策划的美术不是好程序！</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">34</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=649856329&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://steamcommunity.com/id/daachun/" target="_blank" title="Steam"><i class="fab fa-steam"></i></a><a class="social-icon" href="mailto:649856329@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://github.com/Daachun" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E8%A6%81%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">简要介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%AF%BC%E5%85%A5%E6%8F%92%E4%BB%B6"><span class="toc-number">2.1.</span> <span class="toc-text">新建项目和导入插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E8%AF%A6%E7%BB%86%E9%85%8D%E7%BD%AE"><span class="toc-number">2.2.</span> <span class="toc-text">项目详细配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E5%9D%91"><span class="toc-number">2.3.</span> <span class="toc-text">一些需要注意的坑</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E5%85%A8%E6%99%AF"><span class="toc-number">3.</span> <span class="toc-text">实现全景</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%A9%E7%A9%BA%E7%9B%92"><span class="toc-number">3.1.</span> <span class="toc-text">天空盒</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%95%E7%BA%BF%E5%90%91%E5%86%85%E7%9A%84%E7%90%83"><span class="toc-number">3.2.</span> <span class="toc-text">法线向内的球</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E6%94%B9%E6%94%B9Shader"><span class="toc-number">3.3.</span> <span class="toc-text">简单改改Shader</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E4%BA%A4%E4%BA%92"><span class="toc-number">4.</span> <span class="toc-text">实现交互</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%9D%E8%A7%86%E4%BA%A4%E4%BA%92"><span class="toc-number">4.1.</span> <span class="toc-text">凝视交互</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/01/13/%5B%E7%AC%94%E8%AE%B0%5D%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E8%AE%B0%E5%BD%95/" title="[笔记]学习资源记录"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210517.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[笔记]学习资源记录"/></a><div class="content"><a class="title" href="/2021/01/13/%5B%E7%AC%94%E8%AE%B0%5D%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E8%AE%B0%E5%BD%95/" title="[笔记]学习资源记录">[笔记]学习资源记录</a><time datetime="2021-01-13T04:12:27.000Z" title="发表于 2021-01-13 12:12:27">2021-01-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/11/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B0-100%E5%B1%82%E6%A5%BC%E6%91%942%E4%B8%AA%E8%8B%B9%E6%9E%9C%EF%BC%9F%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%A1%86%E6%9E%B6/" title="笔记-100层楼摔2个苹果？动态规划框架"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201113191346.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="笔记-100层楼摔2个苹果？动态规划框架"/></a><div class="content"><a class="title" href="/2020/11/11/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B0-100%E5%B1%82%E6%A5%BC%E6%91%942%E4%B8%AA%E8%8B%B9%E6%9E%9C%EF%BC%9F%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%A1%86%E6%9E%B6/" title="笔记-100层楼摔2个苹果？动态规划框架">笔记-100层楼摔2个苹果？动态规划框架</a><time datetime="2020-11-11T09:11:22.000Z" title="发表于 2020-11-11 17:11:22">2020-11-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/06/Unity/Unity-%E5%90%88%E7%90%86%E4%BC%98%E5%8C%96Unity%E7%9A%84GC/" title="Unity-合理优化Unity的GC"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201108005923.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Unity-合理优化Unity的GC"/></a><div class="content"><a class="title" href="/2020/11/06/Unity/Unity-%E5%90%88%E7%90%86%E4%BC%98%E5%8C%96Unity%E7%9A%84GC/" title="Unity-合理优化Unity的GC">Unity-合理优化Unity的GC</a><time datetime="2020-11-06T08:50:10.000Z" title="发表于 2020-11-06 16:50:10">2020-11-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/03/Unity/Unity-%E9%A1%B9%E7%9B%AE%E7%BA%A6%E5%AE%9A/" title="Unity-项目约定"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201103095215.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Unity-项目约定"/></a><div class="content"><a class="title" href="/2020/11/03/Unity/Unity-%E9%A1%B9%E7%9B%AE%E7%BA%A6%E5%AE%9A/" title="Unity-项目约定">Unity-项目约定</a><time datetime="2020-11-03T01:49:48.000Z" title="发表于 2020-11-03 09:49:48">2020-11-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/10/26/Unity/VR%E5%BC%80%E5%8F%91-Unity2019%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84CardboardVR%E5%BC%80%E5%8F%91/" title="VR开发-Unity2019环境下的Cardboard VR开发"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201028090652.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="VR开发-Unity2019环境下的Cardboard VR开发"/></a><div class="content"><a class="title" href="/2020/10/26/Unity/VR%E5%BC%80%E5%8F%91-Unity2019%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84CardboardVR%E5%BC%80%E5%8F%91/" title="VR开发-Unity2019环境下的Cardboard VR开发">VR开发-Unity2019环境下的Cardboard VR开发</a><time datetime="2020-10-26T09:50:15.000Z" title="发表于 2020-10-26 17:50:15">2020-10-26</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201028090652.png)"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2021 By Daachun</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.spacingElementById('content-inner')
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.spacingElementById('content-inner')
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: '8CFscafTjfjGcsilNQmda6vv-gzGzoHsz',
+      appKey: 'LJAnvsSfSunbV8eX0IvJn0F8',
+      placeholder: '请尽情评论吧！',
+      avatar: 'identicon',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign(initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><style>.aplayer.no-destroy.no-reload.aplayer-withlist.aplayer-fixed.aplayer-narrow .aplayer-body{left:-66px!important;}.aplayer.no-destroy.no-reload.aplayer-withlist.aplayer-fixed.aplayer-narrow .aplayer-body:hover{left:0px!important}</style><div class="aplayer no-destroy" data-id="34194010" data-server="netease" data-type='playlist' data-fixed='true' data-mini='true' data-listFolded='true' data-order='random' data-preload='auto' data-autoplay='false' data-volume = '0.5' data-lrc-type='0'   muted></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config_change',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  if (typeof gtag === 'function') {
+    gtag('config', '', {'page_path': window.location.pathname});
+  }
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+
+document.addEventListener('pjax:send', function () {
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})</script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  bp.dataset.pjax = ''
+  const s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})()</script></div></body></html>

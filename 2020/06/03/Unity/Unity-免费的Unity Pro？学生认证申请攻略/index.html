@@ -1,0 +1,368 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>[Unity]免费的Unity Pro？学生认证申请攻略 | NGGames | 造梦者</title><meta name="keywords" content="Unity,资源"><meta name="author" content="Daachun"><meta name="copyright" content="Daachun"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="免费的UnityPro申请步骤">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Unity]免费的Unity Pro？学生认证申请攻略">
+<meta property="og:url" content="http://daachun.com/2020/06/03/Unity/Unity-%E5%85%8D%E8%B4%B9%E7%9A%84Unity%20Pro%EF%BC%9F%E5%AD%A6%E7%94%9F%E8%AE%A4%E8%AF%81%E7%94%B3%E8%AF%B7%E6%94%BB%E7%95%A5/index.html">
+<meta property="og:site_name" content="NGGames | 造梦者">
+<meta property="og:description" content="免费的UnityPro申请步骤">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210422.png">
+<meta property="article:published_time" content="2020-06-03T03:43:47.000Z">
+<meta property="article:modified_time" content="2020-08-15T18:51:34.713Z">
+<meta property="article:author" content="Daachun">
+<meta property="article:tag" content="Unity">
+<meta property="article:tag" content="资源">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210422.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://daachun.com/2020/06/03/Unity/Unity-%E5%85%8D%E8%B4%B9%E7%9A%84Unity%20Pro%EF%BC%9F%E5%AD%A6%E7%94%9F%E8%AE%A4%E8%AF%81%E7%94%B3%E8%AF%B7%E6%94%BB%E7%95%A5/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="preconnect" href="//zz.bdstatic.com"/><meta name="baidu-site-verification" content="BfQAZEFBNX"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-right"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-08-16 02:51:34'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}const fontSizeVal = saveToLocal.get('global-font-size')
+if (fontSizeVal !== undefined) {
+  document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+}})()</script><style type="text/css">#toggle-sidebar {bottom: 80px}</style><meta name="generator" content="Hexo 5.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/205247.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">34</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-file"></i><span> 博客</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://tableconvert.com/"><i class="fa-fw fas fa-table"></i><span> 表格生成</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-heartbeat"></i><span> 喜欢</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://leetcode-cn.com/"><i class="fa-fw fas fa-code"></i><span> 去刷题</span></a></li><li><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-photo-video"></i><span> 相册</span></a></li><li><a class="site-page" href="/IdeaGenerator/"><i class="fa-fw fas fa-lightbulb"></i><span> 狗屁不通</span></a></li><li><a class="site-page" href="/proj/"><i class="fa-fw fas fa-tasks"></i><span> 项目发布</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-film"></i><span> 追番</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://mo.fish/"><i class="fa-fw fas fa-thumbs-up"></i><span> 摸鱼</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210422.png)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">NGGames | 造梦者</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-file"></i><span> 博客</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://tableconvert.com/"><i class="fa-fw fas fa-table"></i><span> 表格生成</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-heartbeat"></i><span> 喜欢</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://leetcode-cn.com/"><i class="fa-fw fas fa-code"></i><span> 去刷题</span></a></li><li><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-photo-video"></i><span> 相册</span></a></li><li><a class="site-page" href="/IdeaGenerator/"><i class="fa-fw fas fa-lightbulb"></i><span> 狗屁不通</span></a></li><li><a class="site-page" href="/proj/"><i class="fa-fw fas fa-tasks"></i><span> 项目发布</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-film"></i><span> 追番</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://mo.fish/"><i class="fa-fw fas fa-thumbs-up"></i><span> 摸鱼</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">[Unity]免费的Unity Pro？学生认证申请攻略</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-06-03T03:43:47.000Z" title="发表于 2020-06-03 11:43:47">2020-06-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-08-15T18:51:34.713Z" title="更新于 2020-08-16 02:51:34">2020-08-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Unity/">Unity</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="首先你要确定…"><a href="#首先你要确定…" class="headerlink" title="首先你要确定…"></a>首先你要确定…</h1><p>先停一下！我知道你很想白嫖UnityPro，开心的使用黑色主题。但是你要先确定你是<strong>在校学生</strong>。</p>
+<p>只有在校学生才能申请这个学生认证噢！</p>
+<p>UnityPro很贵是怎么回事呢？UnityPro相信大家都很熟悉，但是UnityPro很贵是怎么回事呢，下面就让小编带大家一起了解吧。</p>
+<p>UnityPro很贵，其实就是我们没有钱买，大家可能会很惊讶UnityPro怎么会很贵呢？但事实就是这样，小编也感到非常惊讶。</p>
+<p>这就是关于UnityPro很贵的事情了，大家有什么想法呢，欢迎在评论区告诉小编一起讨论哦！</p>
+<p>开玩笑的啦兄弟</p>
+<p>实际上这件事情很简单，Unity和Github算是合作了？只要申请了Github的学生认证，就可以免费获得1年的Unity Pro，同样的Pro有的东西（例如5个高级团队席位，25G的云空间，适用于Pro的服务），这个学生认证送你的Pro中都有。</p>
+<p>这篇文章记录一下里面的步骤和坑。</p>
+<h1 id="获取步骤"><a href="#获取步骤" class="headerlink" title="获取步骤"></a>获取步骤</h1><h2 id="我们需要准备的内容"><a href="#我们需要准备的内容" class="headerlink" title="我们需要准备的内容"></a>我们需要准备的内容</h2><ul>
+<li>保证你可以连接到Unity.com官网，保证你有Unity账号。</li>
+<li>保证你可以连接到Github官网，保证你有Github账号。</li>
+<li>如果你有.edu邮箱，请准备好这个邮箱。</li>
+<li>如果你没有.edu邮箱，请准备好一张你的学生证的照片，记得带<strong>本人照片</strong>以及<strong>日期</strong>。</li>
+<li>上一条中，你也可以上<a target="_blank" rel="noopener" href="https://www.chsi.com.cn/">学信网</a>去对学籍进行截图。</li>
+</ul>
+<h2 id="1-连接账号"><a href="#1-连接账号" class="headerlink" title="1. 连接账号"></a>1. 连接账号</h2><p>首先，打开<a target="_blank" rel="noopener" href="https://github.com/">Github官网</a>，登录你的账号。</p>
+<p>请你打开这个<a target="_blank" rel="noopener" href="https://store.unity.com/academic/unity-student">网页</a>，并登录你的Unity账号。</p>
+<p>在下方的How to access the Unity Student plan中，选择第一步的Authorize。</p>
+<p><img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/2IhUo1MKbdNemzJ.png"></p>
+<p>此时你会打开Github的授权界面，确定授权即可。</p>
+<p>这一步主要是根据Unity的提示，给Unity授权获取你的一些Github的账号信息。</p>
+<h2 id="2-申请Github学生认证"><a href="#2-申请Github学生认证" class="headerlink" title="2. 申请Github学生认证"></a>2. 申请Github学生认证</h2><p>如果你已经申请过Github的学生开发包（GitHub Student Developer Pack），请跳过这一步。</p>
+<p>这一步是让Github确认我们的学生身份，我们准备的.edu邮箱或者学生证信息就是在这一步使用的。</p>
+<p>请点击<a target="_blank" rel="noopener" href="https://education.github.com/pack">这个连接</a>打开认证网页，你会看到这样的画面：<br><img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/AOGQ4EhmqZxvJXz.png"></p>
+<p>点击“Get the Pack”，会进入一个表单的填写。</p>
+<p><img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/NbyfeMHtqOrIjg8.png"></p>
+<p>在这个表单之中：</p>
+<ul>
+<li>选择Student。</li>
+<li>添加你的.edu邮箱，这样认证速度最快。如果没有.edu邮箱，那么就选择你自己的私人邮箱。</li>
+<li>选择你的学校名称（英文全称）。如果下拉列表里面没有你的学校名称，需要你手动填写，并额外填写学校的具体地址。</li>
+<li>在没有edu邮箱的情况下，你还需要上传之前准备好的信息照片。<img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/4JrtZNo5zm1MDyY.png"></li>
+<li>随便编一点你将要准备怎样使用Github。</li>
+</ul>
+<h3 id="重要"><a href="#重要" class="headerlink" title="重要"></a>重要</h3><p>在提交申请前，请一定<strong>不要挂梯子</strong>，当你点击提交，提交信息中有<strong>IP地址</strong>，这能判断你的地理位置。而Github会判断你的地理位置是否和你申请的学校位置相近！如果你挂了梯子（例如美国线路），而学校地址在国内，你的申请会被拒绝！！</p>
+<p><img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/Lzyq4tucrPJFC93.jpg"></p>
+<p>（别问我是怎么知道的）</p>
+<p>解决方法就是关闭梯子，或者挂上你学校的vpn访问Github，再进行提交。</p>
+<p>接下来，等待4天左右，即可收到结果。结果会发送到你的邮箱之中，你也可以每天刷新这个申请表格：申请提交后网页右侧会有申请的状态。</p>
+<p><img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/GoqbLBIc8jE5WdH.png"></p>
+<h2 id="3-获取Unity-Pro激活码"><a href="#3-获取Unity-Pro激活码" class="headerlink" title="3. 获取Unity Pro激活码"></a>3. 获取Unity Pro激活码</h2><p>学生开发包申请成功后，请回到<a target="_blank" rel="noopener" href="https://store.unity.com/academic/unity-student">Unity的认证</a>，点击第三个连接即可，你会在一瞬间收到Unity发给你的Unity Pro激活码。</p>
+<p><img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/vDEqRTObrFZgGlL.png"></p>
+<h2 id="4-Enjoy！"><a href="#4-Enjoy！" class="headerlink" title="4. Enjoy！"></a>4. Enjoy！</h2><p>整活吧！</p>
+<p><img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/SYTLt5U7NVicy8r.jpg"></p>
+<h1 id="还有哪些东西？"><a href="#还有哪些东西？" class="headerlink" title="还有哪些东西？"></a>还有哪些东西？</h1><h2 id="AssetStore内的精品资源"><a href="#AssetStore内的精品资源" class="headerlink" title="AssetStore内的精品资源"></a>AssetStore内的精品资源</h2><p>Unity在后面两天还会给你发一个邮件，欢迎你来到Unity Student plan。<br><img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/giqHfKtxpC8S69N.png"><br>这个邮件下方会有一个Unity Store的优惠码，可以免费获取价值400刀的精品资源。</p>
+<h2 id="JetBrains-IDE"><a href="#JetBrains-IDE" class="headerlink" title="JetBrains IDE"></a>JetBrains IDE</h2><p>你可以通过Github学生开发包，获取一年的<a target="_blank" rel="noopener" href="https://www.jetbrains.com/community/education/?authMethod=github#students">JetBrains全家桶</a>！</p>
+<h2 id="一个免费域名！"><a href="#一个免费域名！" class="headerlink" title="一个免费域名！"></a>一个免费域名！</h2><p>通过Github学生开发包，在name.com获取一年的免费域名！</p>
+<p><img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/RgFEf3d5v7UHxDJ.jpg"></p>
+<h2 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h2><p>在<a target="_blank" rel="noopener" href="https://education.github.com/pack">Github学生开发包网页</a>上获取更多内容！</p>
+<h1 id="参考信息"><a href="#参考信息" class="headerlink" title="参考信息"></a>参考信息</h1><p>这个渠道我是从<a target="_blank" rel="noopener" href="https://unity.cn/u/michael-wang-2/?tab=article">麦扣</a>的<a target="_blank" rel="noopener" href="https://space.bilibili.com/370283072">B站</a>动态获取的，同时在Unity Connect也写有文章。但是奇怪的是，第二天这篇文章和动态就消失了。</p>
+<p>麦扣的一些零基础入门Unity课程也很不错，大家可以去关注一下。</p>
+<p>这里有热心网友的<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43454101/article/details/106422959">备份</a>。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Daachun</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://daachun.com/2020/06/03/Unity/Unity-%E5%85%8D%E8%B4%B9%E7%9A%84Unity%20Pro%EF%BC%9F%E5%AD%A6%E7%94%9F%E8%AE%A4%E8%AF%81%E7%94%B3%E8%AF%B7%E6%94%BB%E7%95%A5/">http://daachun.com/2020/06/03/Unity/Unity-%E5%85%8D%E8%B4%B9%E7%9A%84Unity%20Pro%EF%BC%9F%E5%AD%A6%E7%94%9F%E8%AE%A4%E8%AF%81%E7%94%B3%E8%AF%B7%E6%94%BB%E7%95%A5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://daachun.com" target="_blank">NGGames | 造梦者</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Unity/">Unity</a><a class="post-meta__tags" href="/tags/%E8%B5%84%E6%BA%90/">资源</a></div><div class="post_share"><div class="social-share" data-image="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210422.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/07/05/%E6%9D%82%E8%B0%88/%E6%9D%82%E8%B0%88-%E7%96%AB%E6%83%85%E3%80%81%E8%BF%91%E5%86%B5%E4%B8%8E%E6%AF%95%E4%B8%9A/"><img class="prev-cover" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200706005120.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">[杂谈]疫情、近况与毕业</div></div></a></div><div class="next-post pull-right"><a href="/2020/03/29/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%E3%80%81%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E5%92%8C%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"><img class="next-cover" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/W1yZ9Vr7XdaoYKP.png.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">[设计模式]简单工厂模式、工厂方法模式和抽象工厂模式</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/07/23/Unity/Unity-Bolt免费啦！/" title="[Unity]Bolt免费啦！"><img class="cover" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200723103138.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-23</div><div class="title">[Unity]Bolt免费啦！</div></div></a></div><div><a href="/2020/08/03/Unity/Unity-Bolt学习资源推荐/" title="[Unity]Bolt学习资源推荐"><img class="cover" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200803201438.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-03</div><div class="title">[Unity]Bolt学习资源推荐</div></div></a></div><div><a href="/2020/11/03/Unity/Unity-项目约定/" title="Unity-项目约定"><img class="cover" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201103095215.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-03</div><div class="title">Unity-项目约定</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/205247.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Daachun</div><div class="author-info__description">不想成为策划的美术不是好程序！</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">34</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=649856329&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://steamcommunity.com/id/daachun/" target="_blank" title="Steam"><i class="fab fa-steam"></i></a><a class="social-icon" href="mailto:649856329@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://github.com/Daachun" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A6%96%E5%85%88%E4%BD%A0%E8%A6%81%E7%A1%AE%E5%AE%9A%E2%80%A6"><span class="toc-number">1.</span> <span class="toc-text">首先你要确定…</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%AD%A5%E9%AA%A4"><span class="toc-number">2.</span> <span class="toc-text">获取步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81%E5%87%86%E5%A4%87%E7%9A%84%E5%86%85%E5%AE%B9"><span class="toc-number">2.1.</span> <span class="toc-text">我们需要准备的内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%BF%9E%E6%8E%A5%E8%B4%A6%E5%8F%B7"><span class="toc-number">2.2.</span> <span class="toc-text">1. 连接账号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%94%B3%E8%AF%B7Github%E5%AD%A6%E7%94%9F%E8%AE%A4%E8%AF%81"><span class="toc-number">2.3.</span> <span class="toc-text">2. 申请Github学生认证</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E8%A6%81"><span class="toc-number">2.3.1.</span> <span class="toc-text">重要</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%8E%B7%E5%8F%96Unity-Pro%E6%BF%80%E6%B4%BB%E7%A0%81"><span class="toc-number">2.4.</span> <span class="toc-text">3. 获取Unity Pro激活码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Enjoy%EF%BC%81"><span class="toc-number">2.5.</span> <span class="toc-text">4. Enjoy！</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%98%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B8%9C%E8%A5%BF%EF%BC%9F"><span class="toc-number">3.</span> <span class="toc-text">还有哪些东西？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#AssetStore%E5%86%85%E7%9A%84%E7%B2%BE%E5%93%81%E8%B5%84%E6%BA%90"><span class="toc-number">3.1.</span> <span class="toc-text">AssetStore内的精品资源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JetBrains-IDE"><span class="toc-number">3.2.</span> <span class="toc-text">JetBrains IDE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E5%85%8D%E8%B4%B9%E5%9F%9F%E5%90%8D%EF%BC%81"><span class="toc-number">3.3.</span> <span class="toc-text">一个免费域名！</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E5%A4%9A"><span class="toc-number">3.4.</span> <span class="toc-text">更多</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E4%BF%A1%E6%81%AF"><span class="toc-number">4.</span> <span class="toc-text">参考信息</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/01/13/%5B%E7%AC%94%E8%AE%B0%5D%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E8%AE%B0%E5%BD%95/" title="[笔记]学习资源记录"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210517.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[笔记]学习资源记录"/></a><div class="content"><a class="title" href="/2021/01/13/%5B%E7%AC%94%E8%AE%B0%5D%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E8%AE%B0%E5%BD%95/" title="[笔记]学习资源记录">[笔记]学习资源记录</a><time datetime="2021-01-13T04:12:27.000Z" title="发表于 2021-01-13 12:12:27">2021-01-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/11/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B0-100%E5%B1%82%E6%A5%BC%E6%91%942%E4%B8%AA%E8%8B%B9%E6%9E%9C%EF%BC%9F%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%A1%86%E6%9E%B6/" title="笔记-100层楼摔2个苹果？动态规划框架"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201113191346.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="笔记-100层楼摔2个苹果？动态规划框架"/></a><div class="content"><a class="title" href="/2020/11/11/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B0-100%E5%B1%82%E6%A5%BC%E6%91%942%E4%B8%AA%E8%8B%B9%E6%9E%9C%EF%BC%9F%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%A1%86%E6%9E%B6/" title="笔记-100层楼摔2个苹果？动态规划框架">笔记-100层楼摔2个苹果？动态规划框架</a><time datetime="2020-11-11T09:11:22.000Z" title="发表于 2020-11-11 17:11:22">2020-11-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/06/Unity/Unity-%E5%90%88%E7%90%86%E4%BC%98%E5%8C%96Unity%E7%9A%84GC/" title="Unity-合理优化Unity的GC"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201108005923.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Unity-合理优化Unity的GC"/></a><div class="content"><a class="title" href="/2020/11/06/Unity/Unity-%E5%90%88%E7%90%86%E4%BC%98%E5%8C%96Unity%E7%9A%84GC/" title="Unity-合理优化Unity的GC">Unity-合理优化Unity的GC</a><time datetime="2020-11-06T08:50:10.000Z" title="发表于 2020-11-06 16:50:10">2020-11-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/03/Unity/Unity-%E9%A1%B9%E7%9B%AE%E7%BA%A6%E5%AE%9A/" title="Unity-项目约定"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201103095215.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Unity-项目约定"/></a><div class="content"><a class="title" href="/2020/11/03/Unity/Unity-%E9%A1%B9%E7%9B%AE%E7%BA%A6%E5%AE%9A/" title="Unity-项目约定">Unity-项目约定</a><time datetime="2020-11-03T01:49:48.000Z" title="发表于 2020-11-03 09:49:48">2020-11-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/10/26/Unity/VR%E5%BC%80%E5%8F%91-Unity2019%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84CardboardVR%E5%BC%80%E5%8F%91/" title="VR开发-Unity2019环境下的Cardboard VR开发"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201028090652.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="VR开发-Unity2019环境下的Cardboard VR开发"/></a><div class="content"><a class="title" href="/2020/10/26/Unity/VR%E5%BC%80%E5%8F%91-Unity2019%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84CardboardVR%E5%BC%80%E5%8F%91/" title="VR开发-Unity2019环境下的Cardboard VR开发">VR开发-Unity2019环境下的Cardboard VR开发</a><time datetime="2020-10-26T09:50:15.000Z" title="发表于 2020-10-26 17:50:15">2020-10-26</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210422.png)"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2021 By Daachun</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.spacingElementById('content-inner')
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.spacingElementById('content-inner')
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: '8CFscafTjfjGcsilNQmda6vv-gzGzoHsz',
+      appKey: 'LJAnvsSfSunbV8eX0IvJn0F8',
+      placeholder: '请尽情评论吧！',
+      avatar: 'identicon',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign(initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><style>.aplayer.no-destroy.no-reload.aplayer-withlist.aplayer-fixed.aplayer-narrow .aplayer-body{left:-66px!important;}.aplayer.no-destroy.no-reload.aplayer-withlist.aplayer-fixed.aplayer-narrow .aplayer-body:hover{left:0px!important}</style><div class="aplayer no-destroy" data-id="34194010" data-server="netease" data-type='playlist' data-fixed='true' data-mini='true' data-listFolded='true' data-order='random' data-preload='auto' data-autoplay='false' data-volume = '0.5' data-lrc-type='0'   muted></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config_change',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  if (typeof gtag === 'function') {
+    gtag('config', '', {'page_path': window.location.pathname});
+  }
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+
+document.addEventListener('pjax:send', function () {
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})</script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  bp.dataset.pjax = ''
+  const s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})()</script></div></body></html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>笔记-100层楼摔2个苹果？动态规划框架 | NGGames | 造梦者</title><meta name="keywords" content="Unity,C#,算法"><meta name="author" content="Daachun"><meta name="copyright" content="Daachun"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="从鹰蛋问题学习动态规划思路">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记-100层楼摔2个苹果？动态规划框架">
+<meta property="og:url" content="http://daachun.com/2020/11/11/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B0-100%E5%B1%82%E6%A5%BC%E6%91%942%E4%B8%AA%E8%8B%B9%E6%9E%9C%EF%BC%9F%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%A1%86%E6%9E%B6/index.html">
+<meta property="og:site_name" content="NGGames | 造梦者">
+<meta property="og:description" content="从鹰蛋问题学习动态规划思路">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201113191346.jpg">
+<meta property="article:published_time" content="2020-11-11T09:11:22.000Z">
+<meta property="article:modified_time" content="2020-11-14T17:08:37.328Z">
+<meta property="article:author" content="Daachun">
+<meta property="article:tag" content="Unity">
+<meta property="article:tag" content="C#">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201113191346.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://daachun.com/2020/11/11/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B0-100%E5%B1%82%E6%A5%BC%E6%91%942%E4%B8%AA%E8%8B%B9%E6%9E%9C%EF%BC%9F%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%A1%86%E6%9E%B6/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="preconnect" href="//zz.bdstatic.com"/><meta name="baidu-site-verification" content="BfQAZEFBNX"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-right"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-11-15 01:08:37'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}const fontSizeVal = saveToLocal.get('global-font-size')
+if (fontSizeVal !== undefined) {
+  document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+}})()</script><style type="text/css">#toggle-sidebar {bottom: 80px}</style><meta name="generator" content="Hexo 5.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/205247.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">34</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-file"></i><span> 博客</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://tableconvert.com/"><i class="fa-fw fas fa-table"></i><span> 表格生成</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-heartbeat"></i><span> 喜欢</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://leetcode-cn.com/"><i class="fa-fw fas fa-code"></i><span> 去刷题</span></a></li><li><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-photo-video"></i><span> 相册</span></a></li><li><a class="site-page" href="/IdeaGenerator/"><i class="fa-fw fas fa-lightbulb"></i><span> 狗屁不通</span></a></li><li><a class="site-page" href="/proj/"><i class="fa-fw fas fa-tasks"></i><span> 项目发布</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-film"></i><span> 追番</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://mo.fish/"><i class="fa-fw fas fa-thumbs-up"></i><span> 摸鱼</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201113191346.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">NGGames | 造梦者</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-file"></i><span> 博客</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page" target="_blank" rel="noopener" href="https://tableconvert.com/"><i class="fa-fw fas fa-table"></i><span> 表格生成</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-heartbeat"></i><span> 喜欢</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://leetcode-cn.com/"><i class="fa-fw fas fa-code"></i><span> 去刷题</span></a></li><li><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-photo-video"></i><span> 相册</span></a></li><li><a class="site-page" href="/IdeaGenerator/"><i class="fa-fw fas fa-lightbulb"></i><span> 狗屁不通</span></a></li><li><a class="site-page" href="/proj/"><i class="fa-fw fas fa-tasks"></i><span> 项目发布</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/bangumis/"><i class="fa-fw fas fa-film"></i><span> 追番</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://mo.fish/"><i class="fa-fw fas fa-thumbs-up"></i><span> 摸鱼</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">笔记-100层楼摔2个苹果？动态规划框架</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-11-11T09:11:22.000Z" title="发表于 2020-11-11 17:11:22">2020-11-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-11-14T17:08:37.328Z" title="更新于 2020-11-15 01:08:37">2020-11-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="一道经典题"><a href="#一道经典题" class="headerlink" title="一道经典题"></a>一道经典题</h1><p>面试的过程也是补全自己的过程，要正视自己的缺点，补足落下的知识，虚心求教，终身学习。</p>
+<blockquote>
+<p>来源：百度面试，Google面试题</p>
+</blockquote>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>有一栋100层高楼,从某一层开始扔下的苹果刚好摔坏,现有两个苹果,试用最简便的方法确定这个恰好摔坏苹果的那层。</p>
+<blockquote>
+<p>一幢 100 层的大楼，给你两个鹰蛋。如果在第 n 层扔下鹰蛋，鹰蛋不碎，那么从第 n-1 层扔鹰蛋，都不碎。这两只鹰蛋一模一样，不碎的话可以扔无数次。最高从哪层楼扔下时鹰蛋不会碎？</p>
+<ol>
+<li>如果有无数个鹰蛋，如何求解？</li>
+<li>如果只有两个鹰蛋，如何求解？</li>
+</ol>
+</blockquote>
+<h2 id="不成熟的思考"><a href="#不成熟的思考" class="headerlink" title="不成熟的思考"></a>不成熟的思考</h2><p>我给出的解答是进行分段，第一个球每10层进行摔，在第n个十层摔碎后，第二个球从第n-1个十层开始从小到大遍历摔，就可以确定恰好摔坏苹果的那层。二分法风险大。</p>
+<p>这个思路是<strong>结果导向</strong>，这是不对的：只确定了恰好摔坏苹果的那层，最坏情况是测试18次。应该详细分析，进行归纳。</p>
+<h3 id="有无数个蛋"><a href="#有无数个蛋" class="headerlink" title="有无数个蛋"></a>有无数个蛋</h3><p>这意味着有无数次试错机会，可以用二分法O(logn)的次数内求解问题。</p>
+<h3 id="如果只有两个蛋"><a href="#如果只有两个蛋" class="headerlink" title="如果只有两个蛋"></a>如果只有两个蛋</h3><p><strong>把楼层等分试探求解</strong></p>
+<p>把楼层分为x等分，用第一蛋从上往下一次试探一个范围，如果第一个鹰蛋破了，则用另一鹰蛋穷举。</p>
+<p>假设把总楼层分成了<code>x</code>等分，每个等分内部有<code>n/x</code>个楼层。在最坏情况下，第一个蛋需要试探<code>x</code>次，第二个蛋则要试探<code>n/x-1</code>次（即在每个等分内做穷举），所以最坏的情况需要的总次数为<code>x+(n/x)-1</code>。</p>
+<p>要获取最坏情况的最小值，需要对总次数<code>x+(n/x)-1</code>求导数，并取0值，求解可以得<code>x=sqrt(n)</code>。</p>
+<blockquote>
+<p>​    (x + n/x -1)’</p>
+<p>=  1-(n/x^2)</p>
+<p>=  0</p>
+<p>解得x=sqrt(n)。</p>
+</blockquote>
+<p>在楼层为100的情况下，可以求出使总次数最小的x=10。也就是采用等分的办法，在楼层总数是100时，10等分时最优情况。</p>
+<p><strong>动态规划</strong></p>
+<p>假设有<code>m</code>楼层，<code>n</code>个鹰蛋，则在第<code>i</code>层试探时会出现两种状态：1. 鹰蛋摔破了，则我们下一步只有<code>n-1</code>个鹰蛋，同时总楼层数也缩减为<code>i-1</code>（因为上面的层数可以直接舍去）；2. 鹰蛋没有摔破，那么鹰蛋总数不变，还是<code>n</code>个，楼层数则缩减为<code>m-i</code>层。</p>
+<p>递归在以下三个状态结束：</p>
+<ol>
+<li>如果鹰蛋只剩1个，那么只能对所有的楼层进行穷举；</li>
+<li>如果楼层是0，那么试探0次；</li>
+<li>如果楼层是1，那么试探1次。</li>
+</ol>
+<p><img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201111230816.png" alt="楼层示意"></p>
+<p>状态转移方程：<code>F(m,n) = MAX&#123;F(i-1,n-1)+1, F(m-i,n)+1&#125;;(0&lt;i&lt;m)</code></p>
+<p>在C#中的实现：</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Solution</span> &#123;</span><br><span class="line">    <span class="comment">// m层，n个蛋</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">int</span> <span class="title">PowerEggs</span>(<span class="params"><span class="built_in">int</span> m, <span class="built_in">int</span> n</span>)</span> &#123;</span><br><span class="line">		</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://labuladong.gitbook.io/algo/dong-tai-gui-hua-xi-lie">labuladong的算法小抄</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/31628866">程序员小灰-动态规划</a></p>
+</blockquote>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>动态规划（Dynamic Programming，<strong>简称DP</strong>）是运筹学的一个分支，它是<strong>解决多阶段决策过程最优化的一种数学方法。把多阶段问题变换为一系列相互联系的的单阶段问题，然后逐个加以解决</strong>。</p>
+<p>这里提到动态规划其实是一种数学方法，是求解某类问题的一种方法，而<strong>不是一种特殊的算法</strong>，没有一个标准的数学表达式或明确定义的一种规则。</p>
+<p>总结起来就是一句话：大事化小，小事化了。</p>
+<p>具体来说，动态规划的流程为：<strong>暴力的递归解法 -&gt; 带备忘录的递归解法 -&gt; 迭代的动态规划解法。</strong></p>
+<p>就思考流程来说：<strong>找到状态和选择 -&gt; 明确dp数组/函数的定义 -&gt; 寻找状态之间的关系。</strong></p>
+<h2 id="递归方法"><a href="#递归方法" class="headerlink" title="递归方法"></a>递归方法</h2><p><strong>1. 问题建模</strong></p>
+<p>每一个步骤中，进行分状态定义，再利用递归简化。动态规划当中包含三个重要的概念：<strong>最优子结构</strong>、<strong>边界</strong>、<strong>状态转移公式</strong>。</p>
+<p><strong>2. 求解问题</strong></p>
+<p>拿一个递归方法举例：</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 求解n=8时，Fun返回值</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="built_in">int</span> <span class="title">Fun</span>(<span class="params"><span class="built_in">int</span> n</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(n&lt;<span class="number">0</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">return</span> Fun(n<span class="number">-3</span>)+Fun(n<span class="number">-2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用递归的思路直接做，这是一颗二叉树，树的节点个数就是递归方法需要计算的次数（图中最后一步省略了）。这棵二叉树高度是<code>n-1</code>节点个数接近·<code>2^(n-1)</code>，时间复杂度近似看成O(2^n)。</p>
+<p><img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201111235915.png" alt="运算二叉树"></p>
+<h2 id="备忘录算法"><a href="#备忘录算法" class="headerlink" title="备忘录算法"></a>备忘录算法</h2><p>可以看到上方的递归图有些相同的参数被<strong>重复计算</strong>了，例如中间的两个Fun(3)，这样越往下走，重复的越多。优化方式可以<strong>用缓存</strong>，创建一个哈希表，每次将不同参数结果存入，遇到相同参数时，从哈希表中取出即可。这个方法叫做<strong>备忘录算法</strong>。 + </p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 求解num=8时，Fun返回值</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="built_in">int</span> <span class="title">Fun</span>(<span class="params"><span class="built_in">int</span> n, Dictionary&lt;<span class="built_in">int</span>,<span class="built_in">int</span>&gt; map</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(n&lt;<span class="number">0</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">if</span>(map.ContainsKey(n))</span><br><span class="line">    &#123;</span><br><span class="line">     	<span class="keyword">return</span> map[n];   </span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">int</span> <span class="keyword">value</span> = Fun(n<span class="number">-3</span>,map)+Fun(n<span class="number">-2</span>,map);</span><br><span class="line">        map.Add(n,<span class="keyword">value</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">value</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>集合map是一个备忘录，每次需要计算F(n)的时候，会首先从map中寻找匹配元素，如果存在就直接返回结果，不存在就计算结果，存入备忘录中。时间复杂度和空间复杂度都是O(n)。</p>
+<h2 id="动态规划-1"><a href="#动态规划-1" class="headerlink" title="动态规划"></a>动态规划</h2><p>上面那个备忘录算法当然<strong>不是</strong>真正的动态规划实现，可以进一步减小空间复杂度。<strong>思路逆转</strong>，不对F(n)自顶向下做递归，而是自底向上用迭代。<strong>每一次迭代过程中，只要保留之前的两个状态，就可以推导出新的状态。</strong></p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="built_in">int</span> <span class="title">Fun</span>(<span class="params"><span class="built_in">int</span> n</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 感谢电压酱</span></span><br><span class="line">	<span class="built_in">int</span>[] dp = <span class="keyword">new</span> <span class="built_in">int</span>[n + <span class="number">3</span> + <span class="number">1</span>];</span><br><span class="line">	dp[<span class="number">0</span>] = dp[<span class="number">1</span>] = dp[<span class="number">2</span>] = <span class="number">-1</span>;</span><br><span class="line">    dp[<span class="number">3</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">4</span>; i &lt; n + <span class="number">3</span> + <span class="number">1</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        dp[i] = dp[i - <span class="number">3</span>] + dp[i - <span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n + <span class="number">3</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h1><h2 id="动态规划解题套路框架"><a href="#动态规划解题套路框架" class="headerlink" title="动态规划解题套路框架"></a>动态规划解题套路框架</h2><blockquote>
+<p>LeetCode：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/fibonacci-number">509.斐波那契数</a>，<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/coin-change">322.零钱兑换</a></p>
+</blockquote>
+<p><strong>动态规划问题的一般形式就是求最值</strong>，例如求最长递增子序列，最小编辑距离等。</p>
+<p><strong>求动态规划的核心问题是穷举</strong>。这类问题存在<strong>重叠子问题</strong>，具备<strong>最优子结构</strong>，需要正确的<strong>状态转移方程</strong>。一般来说，写出状态转移方程是最困难的。</p>
+<p>思考框架：明确base case，明确状态，明确选择，定义dp数组/函数的含义。</p>
+<p>代码框架：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 初始化 base case</span><br><span class="line">dp[0][0][...] &#x3D; base</span><br><span class="line"># 进行状态转移</span><br><span class="line">for 状态1 in 状态1的所有取值:</span><br><span class="line">	for 状态2 in 状态2的所有取值:</span><br><span class="line">		for ...</span><br><span class="line">			dp[状态1][状态2][...] &#x3D; 求最值(选择1, 选择2 ...)</span><br></pre></td></tr></table></figure>
+<h2 id="斐波那契数列"><a href="#斐波那契数列" class="headerlink" title="斐波那契数列"></a>斐波那契数列</h2><blockquote>
+<p><strong>斐波那契数</strong>，通常用 <code>F(n)</code> 表示，形成的序列称为<strong>斐波那契数列</strong>。该数列由 <code>0</code> 和 <code>1</code> 开始，后面的每一项数字都是前面两项数字的和。也就是：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">F(0) &#x3D; 0,   F(1) &#x3D; 1</span><br><span class="line">F(N) &#x3D; F(N - 1) + F(N - 2), 其中 N &gt; 1.</span><br></pre></td></tr></table></figure>
+
+<p>给定 <code>N</code>，计算 <code>F(N)</code>。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：2</span><br><span class="line">输出：1</span><br><span class="line">解释：F(2) &#x3D; F(1) + F(0) &#x3D; 1 + 0 &#x3D; 1.</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：3</span><br><span class="line">输出：2</span><br><span class="line">解释：F(3) &#x3D; F(2) + F(1) &#x3D; 1 + 1 &#x3D; 2.</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：4</span><br><span class="line">输出：3</span><br><span class="line">解释：F(4) &#x3D; F(3) + F(2) &#x3D; 2 + 1 &#x3D; 3.</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>0 ≤ <code>N</code> ≤ 30</li>
+</ul>
+</blockquote>
+<h3 id="暴力递归"><a href="#暴力递归" class="headerlink" title="暴力递归"></a>暴力递归</h3><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">int</span> <span class="title">fib</span>(<span class="params"><span class="built_in">int</span> N</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(N&lt;<span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(N==<span class="number">1</span> || N==<span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> fib(N - <span class="number">1</span>) + fib(N - <span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>根据上方的<a href="#%E9%80%92%E5%BD%92%E6%96%B9%E6%B3%95">递归方法</a>，可以画出递归树，能够看出比较低效。时间复杂度为：<strong>子问题的个数 乘以 解决一个子问题需要的时间</strong>。子问题个数是递归树中节点的总数O(2^n)，解决子问题的时间是加法O(1)，总时间为两者相乘O(2^n)。可以看到递归树中有大量重复的计算，这就是动态规划问题的第一个性质：<strong>重叠子问题</strong>。</p>
+<h3 id="带备忘录的递归"><a href="#带备忘录的递归" class="headerlink" title="带备忘录的递归"></a>带备忘录的递归</h3><p>根据上方的<a href="#%E5%A4%87%E5%BF%98%E5%BD%95%E7%AE%97%E6%B3%95">备忘录算法</a>，添加一个哈希表，直接将答案拿来用（空间换时间）。</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">int</span> <span class="title">fib</span>(<span class="params"><span class="built_in">int</span> N</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(N &lt;= <span class="number">1</span>) <span class="keyword">return</span> N;</span><br><span class="line">    Dictionary&lt;<span class="built_in">int</span>,<span class="built_in">int</span>&gt; map = <span class="keyword">new</span> Dictionary&lt;<span class="built_in">int</span>,<span class="built_in">int</span>&gt;();</span><br><span class="line">    map.Add(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">    map.Add(<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> fib(N,map);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="built_in">int</span> <span class="title">fib</span>(<span class="params"><span class="built_in">int</span> N,Dictionary&lt;<span class="built_in">int</span>,<span class="built_in">int</span>&gt; map</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(map.ContainsKey(N)) <span class="keyword">return</span> map[N];</span><br><span class="line">    <span class="built_in">int</span> <span class="keyword">value</span> = Fib(N<span class="number">-1</span>, map) + Fib(N<span class="number">-2</span>, map);</span><br><span class="line">    map.Add(N,<span class="keyword">value</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">value</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>带备忘录的递归算法，把一颗存在巨量冗余的递归树“减枝”，极大减少了子问题的个数。时间复杂度是O(n)。这种方法叫做<strong>自顶向下</strong>，而动态规划叫<strong>自底向上</strong>。</p>
+<p>自顶向下是像我们画递归树一样，从要求的大问题向下分解为小问题。而自底向上是从小问题开始往上推，直到推到我们想要的答案。这也就是动态规划一般脱离递归，而由循环迭代完成的原因。</p>
+<h3 id="dp数组的迭代解法"><a href="#dp数组的迭代解法" class="headerlink" title="dp数组的迭代解法"></a>dp数组的迭代解法</h3><p>我们把这个备忘录独立出来成为一张表，叫做DP table，在这张表上完成自底向上即可。</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">int</span> <span class="title">fib</span>(<span class="params"><span class="built_in">int</span> N</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">int</span>[] dp = <span class="keyword">new</span> <span class="built_in">int</span>[N+<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">if</span>(N&gt;<span class="number">0</span>) dp[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(N&gt;<span class="number">1</span>) dp[<span class="number">2</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">3</span>; i &lt;= N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        dp[i] = dp[i<span class="number">-1</span>] + dp[i<span class="number">-2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[N];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201112203207.png" alt="dp数组"></p>
+<p>实际上就是反过来算剪枝的结果。</p>
+<h3 id="状态转移方程"><a href="#状态转移方程" class="headerlink" title="状态转移方程"></a>状态转移方程</h3><p>实际上是描述问题结构的数学形式：</p>
+<p><img src="https://gblobscdn.gitbook.com/assets%2F-LrtQOWSnDdXhp3kYN4k%2Fsync%2F6b54539705dc61842749cf10bfa80e367c912664.png?alt=media" alt="斐波那契"></p>
+<p>把<code>F(n)</code>想做一个状态 <code>n</code>，这个状态 <code>n</code> 是由状态 <code>n - 1</code> 和状态 <code>n - 2</code> 相加转移而来，这就叫状态转移。</p>
+<p>可以看出，上面几种解法中的所有操作，例如 <code>return f(n - 1) + f(n - 2)</code>，<code>dp[i] = dp[i - 1] + dp[i - 2]</code>，对备忘录或DP表的初始化，都是这个额方程式的不同表现形式。因此，<strong>状态转移方程是解决问题的核心</strong>，且直接代表暴力解法。动态规划问题最困难的就是写出这个暴力解（状态转移方程），接下来优化方法无非是用备忘录或者DP table。</p>
+<h3 id="状态压缩"><a href="#状态压缩" class="headerlink" title="状态压缩"></a>状态压缩</h3><p>可以看出，根据斐波那契数列的状态转移方程，当前状态只和前两个状态有关，并不需要那么长的一个DP table来存储所有状态，只要想办法存储之前的两个状态就行了。可以进一步优化，把空间复杂度降为O(1)：</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="built_in">int</span> <span class="title">fib</span>(<span class="params"><span class="built_in">int</span> n</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">2</span> || n == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">int</span> prev = <span class="number">1</span>; </span><br><span class="line">    <span class="built_in">int</span> curr = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">3</span>; i &lt;=n; i ++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">int</span> sum = prev + curr;</span><br><span class="line">        prev = curr;</span><br><span class="line">        curr = sum;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> curr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="凑零钱问题"><a href="#凑零钱问题" class="headerlink" title="凑零钱问题"></a>凑零钱问题</h2><p>题目：给出<code>k</code>种面值的硬币，面值分别为<code>c1,c2...ck</code>，每种硬币的数量无限，再给一个总金额<code>amount</code>，问<strong>最少</strong>需要几枚硬币凑出这个金额，如果不可能凑出，返回-1。方法声明如下：</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment">// coins中是可选硬币面值，amount是目标金额</span></span><br><span class="line"><span class="function"><span class="built_in">int</span> <span class="title">coinChange</span>(<span class="params"><span class="built_in">int</span>[] coins, <span class="built_in">int</span> amount</span>)</span>;</span><br></pre></td></tr></table></figure>
+<p>例：当<code>k = 3</code>，面值为1，2，5，总金额<code>amount = 11</code>。那么最少需要3枚硬币凑出，即11=5+5+1。</p>
+<p>计算机如何解决这个问题？把所有可能的凑硬币方法琼剧出来，然后找找看最少需要多少枚硬币。</p>
+<h3 id="暴力递归-1"><a href="#暴力递归-1" class="headerlink" title="暴力递归"></a>暴力递归</h3><p>这个问题是动态规划问题，因为具有<strong>最优子结构</strong>，即子问题间相互独立：如果想求<code>amount = 11</code>的最少硬币数，只要求出<code>amount = 10</code>的数量，再加1即可（添加一枚面值1的硬币）。因为硬币数量是没有限制的，所以子问题之间没有限制，是相互独立的。</p>
+<p><strong>如何列出正确的状态转移方程？</strong></p>
+<ol>
+<li><strong>确定<em>base case</em></strong>：目标金额<code>amount = 0</code>时算法返回0；</li>
+<li><strong>确定<em>状态</em>，也就是原问题和子问题中会变化的变量</strong>。由于硬币数量无限，硬币面额也是给定的，只有目标金额会不断向base case靠近，因此唯一的状态就是目标金额<code>amount</code>。</li>
+<li><strong>确定<em>选择</em>，也就是导致<em>状态</em>产生变化的行为</strong>。目标金额变化的原因是在选择硬币，每选择一枚硬币，就相当于减少了目标金额。选择硬币的面额，就是选择。</li>
+<li><strong>明确<code>dp</code>函数/数组的定义</strong>。暴力递归是自顶向下的解法，所以会有递归的<code>dp</code>函数，一般来说函数的参数就是状态转移中会变化的量，也就是<em>状态</em>；函数的返回值就是我们要计算的量。因此我们可以这样定义：</li>
+</ol>
+<p><code>dp(n)</code>的定义：输入一个目标金额<code>n</code>，返回凑出目标金额<code>n</code>的最少硬币数量。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">coinChange</span>(<span class="params">coins: List[<span class="built_in">int</span>], amount: <span class="built_in">int</span></span>):</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">dp</span>(<span class="params">n</span>):</span></span><br><span class="line">		<span class="comment"># base case</span></span><br><span class="line">		<span class="keyword">if</span> n == <span class="number">0</span>: <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">		<span class="keyword">if</span> n &lt; <span class="number">0</span>: <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">        <span class="comment"># 求最小值，所以初始化为正无穷</span></span><br><span class="line">		res = <span class="built_in">float</span>(<span class="string">&#x27;INF&#x27;</span>)</span><br><span class="line">		<span class="keyword">for</span> coin <span class="keyword">in</span> coins:</span><br><span class="line">            subproblem = dp(n - coin)</span><br><span class="line">            <span class="comment"># 子问题无解，跳过</span></span><br><span class="line">            <span class="keyword">if</span> subproblem == -<span class="number">1</span>: <span class="keyword">continue</span></span><br><span class="line">            res = <span class="built_in">min</span>(res, <span class="number">1</span> + subproblem)</span><br><span class="line">        <span class="keyword">return</span> res <span class="keyword">if</span> res != <span class="built_in">float</span>(<span class="string">&#x27;INF&#x27;</span>) <span class="keyword">else</span> -<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> dp(amount)</span><br></pre></td></tr></table></figure>
+<p>数学形式的状态转移方程：</p>
+<p><img src="https://gblobscdn.gitbook.com/assets%2F-LrtQOWSnDdXhp3kYN4k%2Fsync%2F5381a5e30482682c1c6f111e882991113b8661f7.png?alt=media" alt="凑零钱"></p>
+<p>至此暴力法解决，时间复杂度为O(k*n^k)，指数级别。</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Solution</span> &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">int</span> <span class="title">CoinChange</span>(<span class="params"><span class="built_in">int</span>[] coins, <span class="built_in">int</span> amount</span>) </span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">return</span> dp(coins,amount);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">int</span> <span class="title">dp</span>(<span class="params"><span class="built_in">int</span>[] coins, <span class="built_in">int</span> amount</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">if</span>(amount == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(amount &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="built_in">int</span> res = <span class="built_in">int</span>.MaxValue;</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; coins.Length; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">int</span> sub = dp(coins, amount - coins[i]);</span><br><span class="line">            <span class="keyword">if</span>(sub == <span class="number">-1</span>) <span class="keyword">continue</span>;</span><br><span class="line">            res = Math.Min(res, <span class="number">1</span> + sub);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(res != <span class="built_in">int</span>.MaxValue) <span class="keyword">return</span> res;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="comment">// 超时</span></span><br></pre></td></tr></table></figure>
+<h3 id="带备忘录递归"><a href="#带备忘录递归" class="headerlink" title="带备忘录递归"></a>带备忘录递归</h3><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Solution</span> &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">int</span> <span class="title">CoinChange</span>(<span class="params"><span class="built_in">int</span>[] coins, <span class="built_in">int</span> amount</span>) </span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        Dictionary&lt;<span class="built_in">int</span>,<span class="built_in">int</span>&gt; memo = <span class="keyword">new</span> Dictionary&lt;<span class="built_in">int</span>,<span class="built_in">int</span>&gt;();</span><br><span class="line">        <span class="keyword">return</span> dp(coins,amount,memo);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">int</span> <span class="title">dp</span>(<span class="params"><span class="built_in">int</span>[] coins, <span class="built_in">int</span> amount, Dictionary&lt;<span class="built_in">int</span>,<span class="built_in">int</span>&gt; memo</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">if</span>(memo.ContainsKey(amount)) <span class="keyword">return</span> memo[amount];</span><br><span class="line">        <span class="keyword">if</span>(amount == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(amount &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="built_in">int</span> res = <span class="built_in">int</span>.MaxValue;</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; coins.Length; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">int</span> sub = dp(coins, amount - coins[i],memo);</span><br><span class="line">            <span class="keyword">if</span>(sub == <span class="number">-1</span>) <span class="keyword">continue</span>;</span><br><span class="line">            res = Math.Min(res, <span class="number">1</span> + sub);</span><br><span class="line">        &#125;</span><br><span class="line">        memo[amount] = res != <span class="built_in">int</span>.MaxValue?res:<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">return</span> memo[amount];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还是很慢，时间复杂度O(kn)。</p>
+<h3 id="dp数组的迭代解法-1"><a href="#dp数组的迭代解法-1" class="headerlink" title="dp数组的迭代解法"></a>dp数组的迭代解法</h3><p>主要问题是<strong>确定dp数组的定义</strong>：当目标金额为<code>i</code>时，至少需要<code>dp[i]</code>枚硬币凑出。</p>
+<p>根据开头的动态规划代码框架可以写出：</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Solution</span> &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">int</span> <span class="title">CoinChange</span>(<span class="params"><span class="built_in">int</span>[] coins, <span class="built_in">int</span> amount</span>) </span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">     	<span class="built_in">int</span>[] dp = <span class="keyword">new</span> <span class="built_in">int</span>[amount + <span class="number">1</span>];</span><br><span class="line">        <span class="comment">//base case</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; amount + <span class="number">1</span>; i ++)</span><br><span class="line">        &#123;</span><br><span class="line">            dp[i] = amount + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// for循环遍历所有状态</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; dp.Length; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="built_in">int</span> j = <span class="number">0</span>; j &lt; coins.Length; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(i - coins[j] &lt; <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">                dp[i] = Math.Min(dp[i], <span class="number">1</span>+ dp[i - coins[j]]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (dp[amount] != amount + <span class="number">1</span>)? dp[amount]:<span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201115004711.png" alt="dp数组定义"></p>
+<p><code>dp</code>初始化成<code>amount+1</code>的原因是，凑成<code>amount</code>金额的硬币数最多只可能等于<code>amount</code>（也就是全用1元），所以初始化为<code>amount+1</code>相当于正无穷，可以取最小值。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><strong>计算机解决问题的办法就是穷举</strong>，算法设计是先思考“如何穷举”，再追求“如何聪明地穷举”。列出状态转移方程就是解决“如何穷举”，备忘录、DP table就是在追求“如何聪明地穷举”。无非是空间换时间。</p>
+<p>阅读题目时，要往<em>状态</em>和<em>选择</em>上思考，才能对框架产生自己的理解。</p>
+<p><strong>最优子结构性质是动态规划问题的必要条件，因此一般都是要你求最值的</strong>，直接从base case往后推导，以小博大。动态规划就是递推填表格（DP数组）的游戏，将问题转化。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Daachun</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://daachun.com/2020/11/11/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B0-100%E5%B1%82%E6%A5%BC%E6%91%942%E4%B8%AA%E8%8B%B9%E6%9E%9C%EF%BC%9F%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%A1%86%E6%9E%B6/">http://daachun.com/2020/11/11/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B0-100%E5%B1%82%E6%A5%BC%E6%91%942%E4%B8%AA%E8%8B%B9%E6%9E%9C%EF%BC%9F%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%A1%86%E6%9E%B6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://daachun.com" target="_blank">NGGames | 造梦者</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Unity/">Unity</a><a class="post-meta__tags" href="/tags/C/">C#</a><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95/">算法</a></div><div class="post_share"><div class="social-share" data-image="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201113191346.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/01/13/%5B%E7%AC%94%E8%AE%B0%5D%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E8%AE%B0%E5%BD%95/"><img class="prev-cover" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210517.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">[笔记]学习资源记录</div></div></a></div><div class="next-post pull-right"><a href="/2020/11/06/Unity/Unity-%E5%90%88%E7%90%86%E4%BC%98%E5%8C%96Unity%E7%9A%84GC/"><img class="next-cover" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201108005923.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Unity-合理优化Unity的GC</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/03/25/算法笔记/笔记-洗牌算法/" title="[笔记]洗牌算法"><img class="cover" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/ejARZn5tg7olkKP.png.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-03-25</div><div class="title">[笔记]洗牌算法</div></div></a></div><div><a href="/2020/03/22/设计模式笔记/设计模式-单例模式/" title="[设计模式]单例模式"><img class="cover" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/W1yZ9Vr7XdaoYKP.png.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-03-22</div><div class="title">[设计模式]单例模式</div></div></a></div><div><a href="/2020/08/06/算法笔记/笔记-Leetcode题型总结/" title="[笔记]Leetcode题型总结"><img class="cover" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200806134602.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-06</div><div class="title">[笔记]Leetcode题型总结</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/205247.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Daachun</div><div class="author-info__description">不想成为策划的美术不是好程序！</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">34</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&amp;uin=649856329&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://steamcommunity.com/id/daachun/" target="_blank" title="Steam"><i class="fab fa-steam"></i></a><a class="social-icon" href="mailto:649856329@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://github.com/Daachun" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E9%81%93%E7%BB%8F%E5%85%B8%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">一道经典题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-number">1.1.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E6%88%90%E7%86%9F%E7%9A%84%E6%80%9D%E8%80%83"><span class="toc-number">1.2.</span> <span class="toc-text">不成熟的思考</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E6%97%A0%E6%95%B0%E4%B8%AA%E8%9B%8B"><span class="toc-number">1.2.1.</span> <span class="toc-text">有无数个蛋</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E5%8F%AA%E6%9C%89%E4%B8%A4%E4%B8%AA%E8%9B%8B"><span class="toc-number">1.2.2.</span> <span class="toc-text">如果只有两个蛋</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="toc-number">2.</span> <span class="toc-text">动态规划</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">2.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%92%E5%BD%92%E6%96%B9%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">递归方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%87%E5%BF%98%E5%BD%95%E7%AE%97%E6%B3%95"><span class="toc-number">2.3.</span> <span class="toc-text">备忘录算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-1"><span class="toc-number">2.4.</span> <span class="toc-text">动态规划</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0"><span class="toc-number">3.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%A7%A3%E9%A2%98%E5%A5%97%E8%B7%AF%E6%A1%86%E6%9E%B6"><span class="toc-number">3.1.</span> <span class="toc-text">动态规划解题套路框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97"><span class="toc-number">3.2.</span> <span class="toc-text">斐波那契数列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9A%B4%E5%8A%9B%E9%80%92%E5%BD%92"><span class="toc-number">3.2.1.</span> <span class="toc-text">暴力递归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%A6%E5%A4%87%E5%BF%98%E5%BD%95%E7%9A%84%E9%80%92%E5%BD%92"><span class="toc-number">3.2.2.</span> <span class="toc-text">带备忘录的递归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dp%E6%95%B0%E7%BB%84%E7%9A%84%E8%BF%AD%E4%BB%A3%E8%A7%A3%E6%B3%95"><span class="toc-number">3.2.3.</span> <span class="toc-text">dp数组的迭代解法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B"><span class="toc-number">3.2.4.</span> <span class="toc-text">状态转移方程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9"><span class="toc-number">3.2.5.</span> <span class="toc-text">状态压缩</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%91%E9%9B%B6%E9%92%B1%E9%97%AE%E9%A2%98"><span class="toc-number">3.3.</span> <span class="toc-text">凑零钱问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9A%B4%E5%8A%9B%E9%80%92%E5%BD%92-1"><span class="toc-number">3.3.1.</span> <span class="toc-text">暴力递归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%A6%E5%A4%87%E5%BF%98%E5%BD%95%E9%80%92%E5%BD%92"><span class="toc-number">3.3.2.</span> <span class="toc-text">带备忘录递归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dp%E6%95%B0%E7%BB%84%E7%9A%84%E8%BF%AD%E4%BB%A3%E8%A7%A3%E6%B3%95-1"><span class="toc-number">3.3.3.</span> <span class="toc-text">dp数组的迭代解法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/01/13/%5B%E7%AC%94%E8%AE%B0%5D%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E8%AE%B0%E5%BD%95/" title="[笔记]学习资源记录"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210517.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="[笔记]学习资源记录"/></a><div class="content"><a class="title" href="/2021/01/13/%5B%E7%AC%94%E8%AE%B0%5D%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E8%AE%B0%E5%BD%95/" title="[笔记]学习资源记录">[笔记]学习资源记录</a><time datetime="2021-01-13T04:12:27.000Z" title="发表于 2021-01-13 12:12:27">2021-01-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/11/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B0-100%E5%B1%82%E6%A5%BC%E6%91%942%E4%B8%AA%E8%8B%B9%E6%9E%9C%EF%BC%9F%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%A1%86%E6%9E%B6/" title="笔记-100层楼摔2个苹果？动态规划框架"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201113191346.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="笔记-100层楼摔2个苹果？动态规划框架"/></a><div class="content"><a class="title" href="/2020/11/11/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B0-100%E5%B1%82%E6%A5%BC%E6%91%942%E4%B8%AA%E8%8B%B9%E6%9E%9C%EF%BC%9F%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%A1%86%E6%9E%B6/" title="笔记-100层楼摔2个苹果？动态规划框架">笔记-100层楼摔2个苹果？动态规划框架</a><time datetime="2020-11-11T09:11:22.000Z" title="发表于 2020-11-11 17:11:22">2020-11-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/06/Unity/Unity-%E5%90%88%E7%90%86%E4%BC%98%E5%8C%96Unity%E7%9A%84GC/" title="Unity-合理优化Unity的GC"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201108005923.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Unity-合理优化Unity的GC"/></a><div class="content"><a class="title" href="/2020/11/06/Unity/Unity-%E5%90%88%E7%90%86%E4%BC%98%E5%8C%96Unity%E7%9A%84GC/" title="Unity-合理优化Unity的GC">Unity-合理优化Unity的GC</a><time datetime="2020-11-06T08:50:10.000Z" title="发表于 2020-11-06 16:50:10">2020-11-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/03/Unity/Unity-%E9%A1%B9%E7%9B%AE%E7%BA%A6%E5%AE%9A/" title="Unity-项目约定"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201103095215.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Unity-项目约定"/></a><div class="content"><a class="title" href="/2020/11/03/Unity/Unity-%E9%A1%B9%E7%9B%AE%E7%BA%A6%E5%AE%9A/" title="Unity-项目约定">Unity-项目约定</a><time datetime="2020-11-03T01:49:48.000Z" title="发表于 2020-11-03 09:49:48">2020-11-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/10/26/Unity/VR%E5%BC%80%E5%8F%91-Unity2019%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84CardboardVR%E5%BC%80%E5%8F%91/" title="VR开发-Unity2019环境下的Cardboard VR开发"><img src="https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201028090652.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="VR开发-Unity2019环境下的Cardboard VR开发"/></a><div class="content"><a class="title" href="/2020/10/26/Unity/VR%E5%BC%80%E5%8F%91-Unity2019%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84CardboardVR%E5%BC%80%E5%8F%91/" title="VR开发-Unity2019环境下的Cardboard VR开发">VR开发-Unity2019环境下的Cardboard VR开发</a><time datetime="2020-10-26T09:50:15.000Z" title="发表于 2020-10-26 17:50:15">2020-10-26</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20201113191346.jpg)"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2021 By Daachun</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.spacingElementById('content-inner')
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.spacingElementById('content-inner')
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: '8CFscafTjfjGcsilNQmda6vv-gzGzoHsz',
+      appKey: 'LJAnvsSfSunbV8eX0IvJn0F8',
+      placeholder: '请尽情评论吧！',
+      avatar: 'identicon',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign(initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><style>.aplayer.no-destroy.no-reload.aplayer-withlist.aplayer-fixed.aplayer-narrow .aplayer-body{left:-66px!important;}.aplayer.no-destroy.no-reload.aplayer-withlist.aplayer-fixed.aplayer-narrow .aplayer-body:hover{left:0px!important}</style><div class="aplayer no-destroy" data-id="34194010" data-server="netease" data-type='playlist' data-fixed='true' data-mini='true' data-listFolded='true' data-order='random' data-preload='auto' data-autoplay='false' data-volume = '0.5' data-lrc-type='0'   muted></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config_change',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  if (typeof gtag === 'function') {
+    gtag('config', '', {'page_path': window.location.pathname});
+  }
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+
+document.addEventListener('pjax:send', function () {
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})</script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  bp.dataset.pjax = ''
+  const s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})()</script></div></body></html>
