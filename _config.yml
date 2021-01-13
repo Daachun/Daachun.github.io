@@ -109,3 +109,9 @@ deploy:
 - type: git
   repo: https://github.com/Daachun/Daachun.github.io.git
   branch: master
+
+
+  # ----------Plugins----------
+  aplayer:
+    meting: true
+    asset_inject: false
