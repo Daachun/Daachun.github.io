@@ -50,7 +50,7 @@ hide:
 
 对法线贴图(normal mapping)进行采样，需要将存储在纹理空间中的法向量转换到模型空间中，最终转化为世界空间的法线。
 
-``` glsl
+``` cg
 VertexOutput vert (VertexInput v) { // 顶点Shader
 		VertexOutput o = (VertexOutput)0;
 		o.nDirWS = UnityObjectToWorldNormal(v.normal);      // 法线方向
@@ -63,7 +63,7 @@ VertexOutput vert (VertexInput v) { // 顶点Shader
 
 `tDirWS`指的是切线方向，``bDirWS`是副切线方向，需要构建TBN矩阵来进行空间转化。
 
-``` glsl
+``` cg
 float4 frag(VertexOutput i) : COLOR {   // 片元Shader 输出rgba
         // 向量准备
 		float3 nDirTS = UnpackNormal(tex2D(_NormTex,i.uv0)).rgb;    // 切线空间法线方向
@@ -80,7 +80,7 @@ float4 frag(VertexOutput i) : COLOR {   // 片元Shader 输出rgba
 
 Lambert很简单：法线方向和光方向点乘，取大于零的数据。
 
-``` glsl
+``` cg
 float lambert = max(0.0, ndotl);
 ```
 
@@ -88,7 +88,7 @@ float lambert = max(0.0, ndotl);
 
 Half-Lambert在上方基础上，进行了Remap，将[0,1]的计算结果置换到了[0.5,1]之间。
 
-``` glsl
+``` cg
 float halflambert = max(0.0, ndotl) * 0.5 + 0.5;
 ```
 
@@ -100,7 +100,7 @@ float halflambert = max(0.0, ndotl) * 0.5 + 0.5;
 
 固有色和贴图，乘上去就行了。
 
-``` glsl
+``` cg
 float4 var_MainTex = tex2D(_MainTex, i.uv0);	// 纹理采样
 float3 baseCol = var_MainTex * _MainCol;
 // 固有色结果为 baseCol * lambert
@@ -123,7 +123,7 @@ float3 baseCol = var_MainTex * _MainCol;
 
 Phong光照模型需要`vDirWS`和`rDirWS`，其中光反射方向的计算，需要用`reflect()`方法。具体原理是光照到物体表面，根据法线方向进行反射。Phong模型计算光反射方向和视角方向的重叠角度，角度越小，高光越强。注意，`lDirWS`实际上是从模型到光源方向，进行反射计算要反向。
 
-``` glsl
+``` cg
 float3 lDirWS = _WorldSpaceLightPos0.xyz;
 float3 vDirWS = normalize(_WorldSpaceCameraPos.xyz - i.posWS.xyz);  // 世界空间视线方向
 float3 lrDirWS = reflect(-lDirWS, nDirWS);
@@ -136,7 +136,7 @@ float phong = pow(max(0.0, vdotr), specPow);
 
 Blinn-Phong光照模型计算的是法线方向和半角方向的重合程度，角度越小，高光越强。
 
-``` glsl
+``` cg
 float3 hDirWS = normalize(vDirWS + lDirWS);	// 计算半角方向
 float3 ndoth = dot(nDirWS,hDirWS);
 ...
@@ -149,7 +149,7 @@ float blinnPhong = pow(max(0.0,ndoth),_SpecularPow);
 
 暂且不考虑自定义阴影，直接引用Unity给的。主要注意**引用cginc**,结构体内声明格式，以及在顶点片元着色器中的函数。
 
-``` glsl
+``` cg
 ...
 // 追加投影相关文件
 #include "AutoLight.cginc"
@@ -157,7 +157,7 @@ float blinnPhong = pow(max(0.0,ndoth),_SpecularPow);
 ...
 ```
 
-``` glsl
+``` cg
 struct VertexOutput {
 		...
 		float3 bDirWS : TEXCOORD4;  // 世界空间副切线方向
@@ -166,7 +166,7 @@ struct VertexOutput {
 };
 ```
 
-``` glsl
+``` cg
 VertexOutput vert (VertexInput v) { // 顶点Shader
     	...
 		TRANSFER_VERTEX_TO_FRAGMENT(o);		// 投影相关 
@@ -174,7 +174,7 @@ VertexOutput vert (VertexInput v) { // 顶点Shader
 }
 ```
 
-``` glsl
+``` cg
 float4 frag(VertexOutput i) : COLOR {   // 片元Shader 输出rgba
     	...
     	float shadow = LIGHT_ATTENUATION(i);	// 投影相关 
@@ -186,7 +186,7 @@ float4 frag(VertexOutput i) : COLOR {   // 片元Shader 输出rgba
 
 直接光照相关组合
 
-``` glsl
+``` cg
 float3 dirLighting = (baseCol * lambert + specCol * phong) * _LightColor0 * shadow;
 // _LightColor0为光照颜色
 // 漫反射颜色和模型乘，高光颜色和高光模型乘
@@ -198,7 +198,7 @@ float3 dirLighting = (baseCol * lambert + specCol * phong) * _LightColor0 * shad
 
 一个简单的环境色影响。粗略的将环境光分为上部、侧面和底部的颜色，将颜色叠加上去。取值部分需要注意一点，取模型上部，**从世界空间法线方向的y轴取**。
 
-``` glsl
+``` cg
 /// 环境光照
 float upMask = max(0.0, nDirWS.y);      // 取得向上部分遮罩
 float downMask = max(0.0, -nDirWS.y);   // 取得向下部分遮罩
@@ -217,7 +217,7 @@ float3 envDiff = baseCol * envCol * _EnvDiffInt;
 
 计算和视角方向有关，需要求`vdotn`即`vDirWS`和`nDirWS`的点乘。要突出边缘变化，边缘值应为1，中间为0，所以需要用1减去`vdotn`。`_FresnelPow`控制强度。
 
-``` glsl
+``` cg
 float fresnel = pow(max(0.0, 1.0 - vdotn), _FresnelPow);
 ```
 
@@ -231,7 +231,7 @@ MatCap是Material Capture，材质捕获。使用特定材质球的贴图，作�
 
 注意取样时范围应为一个圆，uv需要针对视角做处理。
 
-``` glsl
+``` cg
 ...
 float3 nDirVS = mul(UNITY_MATRIX_V,float4(nDirWS, 0.0));
 float3 vDirWS = normalize(_WorldSpaceCameraPos.xyz - i.posWS.xyz);
@@ -253,7 +253,7 @@ float3 matcap = tex2D(_Matcap, matcapUV);	// 正确取样的颜色
 
 这里面有个概念Mipmap，一个模型身上会有贴图，当我们对这个贴图使用了MipMap技术之后，那么在游戏运行中这个模型的贴图会根据摄像机距离模型的远近而调整不同的不同质量的贴图显示。可以类比LOD。
 
-``` glsl
+``` cg
 float3 vrDirWS = reflect(-vDirWS, nDirWS);	// 视线反射方向
 float cubemapMip = lerp(_CubemapMip, 1.0, var_SpecTex.a); 	// 贴图越亮越光滑
 float3 var_Cubemap = texCUBElod(_Cubemap, float4(vrDirWS, cubemapMip)).rgb;
@@ -273,7 +273,7 @@ float3 var_Cubemap = texCUBElod(_Cubemap, float4(vrDirWS, cubemapMip)).rgb;
 
 ao最后进行遮蔽就可以。
 
-``` glsl
+``` cg
 float3 envLighting = (envDiff + envSpec) * occlusion;
 ```
 
@@ -412,7 +412,7 @@ Shader "Daachun/L10/OldShcoolPro" {
                                 _EnvDownCol * downMask;
                 float3 envDiff = baseCol * envCol * _EnvDiffInt;
                 float fresnel = pow(max(0.0, 1.0 - vdotn), _FresnelPow);   // 菲涅尔
-                float3 envSpec = var_Cubemap * fresnel * _EnvSpecInt;
+                float3 envSpec = var_Cubemap * fresnel * _EnvSpecInt * var_SpecTex.a;
                 float occlusion = var_MainTex.a;
                 float3 envLighting = (envDiff + envSpec) * occlusion;
                 /// 自发光

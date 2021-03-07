@@ -7,8 +7,13 @@
       descr: Looking at the Stars.
     - name: 当如是 | 个人博客
       link: http://www.dengjiayang.cn/
-      avatar: https://xxxxx/avatar.png
+      avatar: https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20210307130810.webp
       descr: 寻知逆风袭来，望御八面来风
+    - name: Lawrence个人站
+      link: https://www.lawrencepeng.com/
+      avatar: https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20210308004754.png
+      descr: 这存放着Lawrence的许多个人作品，请慢慢浏览
+    
 
 - class_name: 网站
   class_desc: 值得推荐的网站
@@ -21,7 +26,4 @@
       link: https://www.weibo.com/
       avatar: https://i.loli.net/2020/05/14/TLJBum386vcnI1P.png
       descr: 中国最大社交分享平台
-    - name: Twitter
-      link: https://twitter.com/
-      avatar: https://i.loli.net/2020/05/14/5VyHPQqR6LWF39a.png
-      descr: 社交分享平台
+
