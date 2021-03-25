@@ -8,6 +8,7 @@
 
 menu:
   首页: / || fas fa-home
+  TA技能: https://zhuanlan.zhihu.com/p/265590519 || fas fa-star
   博客||fas fa-file:
    - 时间轴 || /archives/ || fas fa-archive
    - 标签 || /tags/ || fas fa-tags
@@ -15,8 +16,7 @@ menu:
    - 表格生成 || https://tableconvert.com/ || fas fa-table
   喜欢||fas fa-heartbeat:
     - 去刷题 || https://leetcode-cn.com/ || fas fa-code
-    - 相册 || /Gallery/ || fas fa-photo-video
-    - 狗屁不通 || /IdeaGenerator/ || fas fa-lightbulb
+    - 相册 || /gallery/ || fas fa-photo-video
     - 项目发布 || /proj/ || fas fa-tasks
   追番: /bangumis/ || fas fa-film
   友链: /link/ || fas fa-link
@@ -645,12 +645,12 @@ aside:
     description:
     button:
       enable: true
-      icon: fab fa-github
-      text: Follow Me
-      link: https://github.com/xxxxxx
+      icon: fas fa-beer
+      text: Bilibili
+      link: https://space.bilibili.com/76530
   card_announcement:
     enable: true
-    content: This is my Blog
+    content: 博客正在努力翻新...
   card_recent_post:
     enable: true
     limit: 5 # if set 0 will show all

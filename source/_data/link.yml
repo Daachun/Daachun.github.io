@@ -3,7 +3,7 @@
   link_list:
     - name: 853Lab
       link: https://blog.853lab.com/
-      avatar: https://blog.853lab.com/wp-content/uploads/2018/04/cropped-20180406064718.png
+      avatar: https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20210308010746.png
       descr: Looking at the Stars.
     - name: 当如是 | 个人博客
       link: http://www.dengjiayang.cn/
@@ -13,7 +13,18 @@
       link: https://www.lawrencepeng.com/
       avatar: https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20210308004754.png
       descr: 这存放着Lawrence的许多个人作品，请慢慢浏览
-    
+    - name: 錞媔
+      link: http://www.chunmian.xyz/
+      avatar: https://s1.ax1x.com/2020/07/10/UMypK1.jpg
+      descr: 游戏爱好者
+    - name: moyufeihua
+      link: http://moyufeihua.top/
+      avatar: http://moyufeihua.top/butterfly_img/timg.jpg
+      descr: 我，塔喵，射爆！！
+    - name: 狐狸菌的小站
+      link: https://fungusfox.gitee.io/
+      avatar: https://fungusfox.gitee.io/img/HeadPortrait_hu7da1718f3a0de84648154e5e86c7d0f7_38924_300x0_resize_q75_box.jpg
+      descr: 所有牛逼的人都有一段苦逼的岁月！但是你只要像SB一样的去坚持，终将牛逼！
 
 - class_name: 网站
   class_desc: 值得推荐的网站

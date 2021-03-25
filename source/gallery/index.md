@@ -26,9 +26,9 @@ katex:
 <div class="gallery-group-main">
 
 
-{% galleryGroup '磊子哥的奇妙冒险' '黄山奇遇' '/Gallery/leiadventure' https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200614110342.jpg %}
+{% galleryGroup '磊子哥的奇妙冒险' '黄山奇遇' '/gallery/leiadventure' https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200614110342.jpg %}
 
-{% galleryGroup '主题壁纸' '博客主题相关图' '/Gallery/theme' https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210615.jpg %}
+{% galleryGroup '主题壁纸' '博客主题相关图' '/gallery/theme' https://Daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/20200610210615.jpg %}
 
 </div>
 

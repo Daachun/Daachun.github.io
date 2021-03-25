@@ -131,3 +131,16 @@ search:
   path: search.xml
   field: post
   content: true
+
+bangumi:
+  enable: true
+  path:
+  vmid: 76530
+  title: '追番列表'
+  quote: '生命不息，追番不止！'
+  show: 1
+  loading:
+  metaColor:
+  color:
+  webp:
+  progress:
