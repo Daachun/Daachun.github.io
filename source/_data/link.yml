@@ -26,15 +26,15 @@
       avatar: https://fungusfox.gitee.io/img/HeadPortrait_hu7da1718f3a0de84648154e5e86c7d0f7_38924_300x0_resize_q75_box.jpg
       descr: 所有牛逼的人都有一段苦逼的岁月！但是你只要像SB一样的去坚持，终将牛逼！
 
-- class_name: 网站
-  class_desc: 值得推荐的网站
-  link_list:
-    - name: Youtube
-      link: https://www.youtube.com/
-      avatar: https://i.loli.net/2020/05/14/9ZkGg8v3azHJfM1.png
-      descr: 视频网站
-    - name: Weibo
-      link: https://www.weibo.com/
-      avatar: https://i.loli.net/2020/05/14/TLJBum386vcnI1P.png
-      descr: 中国最大社交分享平台
+# - class_name: 网站推荐
+#   class_desc: 值得推荐的网站
+#   link_list:
+#     - name: Daachun的Bilibili空间
+#       link: 
+#       avatar: https://i.loli.net/2020/05/14/9ZkGg8v3azHJfM1.png
+#       descr: 视频网站
+#     - name: Weibo
+#       link: https://www.weibo.com/
+#       avatar: https://i.loli.net/2020/05/14/TLJBum386vcnI1P.png
+#       descr: 中国最大社交分享平台
 
