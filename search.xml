@@ -4,6 +4,50 @@
   
     
     <entry>
+      <title>Blender-进行一个场景的做！</title>
+      <link href="2021/06/11/Blender/Blender-%E8%BF%9B%E8%A1%8C%E4%B8%80%E4%B8%AA%E5%9C%BA%E6%99%AF%E7%9A%84%E5%81%9A%EF%BC%81/"/>
+      <url>2021/06/11/Blender/Blender-%E8%BF%9B%E8%A1%8C%E4%B8%80%E4%B8%AA%E5%9C%BA%E6%99%AF%E7%9A%84%E5%81%9A%EF%BC%81/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>Blender</p><ul><li><input checked="" disabled="" type="checkbox"> 天空</li><li><input checked="" disabled="" type="checkbox"> 动态云</li><li><input checked="" disabled="" type="checkbox"> 彗星拖尾</li><li><input disabled="" type="checkbox"> 草地</li><li><input disabled="" type="checkbox"> 修改场景</li></ul><p><img src="https://daachun.coding.net/p/blogimg/d/blogimg/git/raw/master/%E8%BF%9B%E5%BA%A6.png" alt="进度"></p><p>Unity还原</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 笔记 </tag>
+            
+            <tag> Blender </tag>
+            
+            <tag> Shader </tag>
+            
+            <tag> 技术美术 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>VR开发-摇摆手移动</title>
+      <link href="2021/05/21/Unity/VR%E5%BC%80%E5%8F%91-%E6%91%87%E6%91%86%E6%89%8B%E7%A7%BB%E5%8A%A8/"/>
+      <url>2021/05/21/Unity/VR%E5%BC%80%E5%8F%91-%E6%91%87%E6%91%86%E6%89%8B%E7%A7%BB%E5%8A%A8/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">PVR_WaveMovement</span> : <span class="title">MonoBehaviour</span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> GameObject LeftHand;</span><br><span class="line"><span class="keyword">public</span> GameObject RightHand;</span><br><span class="line"><span class="keyword">public</span> GameObject CenterEyeCamera;</span><br><span class="line"><span class="keyword">public</span> GameObject ForwardDirection;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> Vector3 PositionPreviousFrameLeftHand;</span><br><span class="line"><span class="keyword">private</span> Vector3 PositionPreviousFrameRightHand;</span><br><span class="line"><span class="keyword">private</span> Vector3 PlayerPositionPreviousFrame;</span><br><span class="line"><span class="keyword">private</span> Vector3 PlayerPositionThisFrame;</span><br><span class="line"><span class="keyword">private</span> Vector3 PositionThisFrameLeftHand;</span><br><span class="line"><span class="keyword">private</span> Vector3 PositionThisFrameRightHand;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="built_in">float</span> Speed = <span class="number">70</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="built_in">float</span> HandSpeed;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Use this for initialization</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span> (<span class="params"></span>)</span> &#123;</span><br><span class="line">PlayerPositionPreviousFrame = transform.position;</span><br><span class="line">PositionPreviousFrameLeftHand = LeftHand.transform.position;</span><br><span class="line">PositionPreviousFrameRightHand = RightHand.transform.position;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Update is called once per frame</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Update</span> (<span class="params"></span>)</span> &#123;</span><br><span class="line"><span class="built_in">float</span> yRotation = CenterEyeCamera.transform.eulerAngles.y;</span><br><span class="line">ForwardDirection.transform.eulerAngles = <span class="keyword">new</span> Vector3(<span class="number">0</span>, yRotation, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">PositionThisFrameLeftHand = LeftHand.transform.position;</span><br><span class="line">PositionThisFrameRightHand = RightHand.transform.position;</span><br><span class="line"></span><br><span class="line">PlayerPositionThisFrame = transform.position;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> playerDistanceMoved = Vector3.Distance(PlayerPositionThisFrame, PlayerPositionPreviousFrame);</span><br><span class="line"><span class="keyword">var</span> leftHandDistanceMoved = Vector3.Distance(PositionPreviousFrameLeftHand, PositionThisFrameLeftHand);</span><br><span class="line"><span class="keyword">var</span> rightHandDistanceMoved = Vector3.Distance(PositionPreviousFrameRightHand, PositionThisFrameRightHand);</span><br><span class="line"></span><br><span class="line">HandSpeed = ((leftHandDistanceMoved - playerDistanceMoved) + (rightHandDistanceMoved - playerDistanceMoved));</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (Time.timeSinceLevelLoad &gt; <span class="number">1f</span>)</span><br><span class="line">transform.position += ForwardDirection.transform.forward * HandSpeed * Speed * Time.deltaTime;</span><br><span class="line"></span><br><span class="line">PositionPreviousFrameLeftHand = PositionThisFrameLeftHand;</span><br><span class="line">PositionPreviousFrameRightHand = PositionThisFrameRightHand;</span><br><span class="line">PlayerPositionPreviousFrame = PlayerPositionThisFrame;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>[Shader]PBR Models</title>
       <link href="2021/03/26/Shader/Shader-PBR%20Models/"/>
       <url>2021/03/26/Shader/Shader-PBR%20Models/</url>
